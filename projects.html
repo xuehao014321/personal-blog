@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== SEO ===== -->
+    <title>Projects | Xue Hao — EcoSortNet, TrustGuard-AI, Sensor Fusion</title>
+    <meta name="description" content="Xue Hao's engineering projects: EcoSortNet (multi-modal sensor fusion waste sorting on Raspberry Pi), TrustGuard-AI (USM Hackathon 2026 AI safety), Vue.js dashboards and AI agent infrastructure." />
+    <meta name="keywords" content="EcoSortNet, TrustGuard-AI, Xue Hao, XUE HAO, 薛皓, UTAR, Raspberry Pi sensor fusion, AS7343, VL53L0X, Vue.js dashboard, UTAR project" />
+    <link rel="canonical" href="https://haoxue.dev/projects.html" />
+    <meta property="og:title" content="Projects | Xue Hao" />
+    <meta property="og:description" content="EcoSortNet, TrustGuard-AI, Vue.js dashboards and more — real hardware and software projects by Xue Hao (UTAR)." />
+    <meta property="og:url" content="https://haoxue.dev/projects.html" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="page-dark">
+    <div class="noise"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header class="header">
+      <a href="/" class="logo magnetic">HX <span>dev</span></a>
+      <nav>
+        <ul>
+          <li><a href="/projects.html" class="magnetic-link active-nav">Projects</a></li>
+          <li><a href="/#timeline-view" class="magnetic-link">Blog</a></li>
+          <li><a href="/about.html" class="magnetic-link">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="page-hero dark-theme">
+        <div class="page-hero-inner">
+          <p class="page-eyebrow">Hardware · Software · Systems</p>
+          <h1 class="page-title">Projects</h1>
+          <p class="page-subtitle">Real systems I've designed, wired, coded and debugged — from sensor fusion prototypes on Raspberry Pi to AI agent deployments on Vercel. Built as a final-year CS student at UTAR.</p>
+        </div>
+      </div>
+
+      <section class="projects-container dark-theme">
+
+        <aside class="sticky-sidebar">
+          <ul class="nav-dots">
+            <li class="nav-item active" data-target="cat-hardware">
+              <div class="nav-indicator"><span class="icon">HW</span></div>
+              <span class="nav-label">Hardware</span>
+            </li>
+            <li class="nav-item" data-target="cat-fullstack">
+              <div class="nav-indicator"><span class="icon">FS</span></div>
+              <span class="nav-label">Full-Stack</span>
+            </li>
+            <li class="nav-item" data-target="cat-ai">
+              <div class="nav-indicator"><span class="icon">AI</span></div>
+              <span class="nav-label">AI / Agents</span>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="scroll-content">
+
+          <!-- Hardware -->
+          <article id="cat-hardware" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">HW</span>
+              <h2>Hardware & Embedded</h2>
+            </div>
+
+            <div class="bento-item gs_reveal project-card">
+              <div class="project-number">01 · Featured Project</div>
+              <span class="tag">Raspberry Pi &middot; Python &middot; AS7343 &middot; VL53L0X &middot; LJC18A3 &middot; Servo</span>
+              <div>
+                <h3>EcoSortNet — Multi-Modal Sensor Fusion Waste Sorting System</h3>
+                <p>My MSc capstone project (supervised by Mr. Goh Hock Guan). A hierarchical waste classification prototype that fuses spectral data, laser ranging and inductive proximity sensing to autonomously sort waste into four categories on a conveyor belt.</p>
+                <p style="margin-top: 0.75rem;">I designed the full hardware circuit topology independently — MG996R and SG90 servo control, camera pipeline, AI classification integration, conveyor mechanics, anti-jam deflector and funnel system — and wrote all Python control logic from scratch.</p>
+                <div class="project-highlights">
+                  <span class="highlight">AS7343 Spectral</span>
+                  <span class="highlight">VL53L0X Ranging</span>
+                  <span class="highlight">LJC18A3 Proximity</span>
+                  <span class="highlight">4-bin Sorting</span>
+                  <span class="highlight">Live AI Classification</span>
+                </div>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link">GitHub ↗</a>
+                <a href="#" class="card-link card-link--primary">Technical Report ↗</a>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal project-card">
+              <div class="project-number">02</div>
+              <span class="tag">Raspberry Pi &middot; I2C &middot; OpenCV &middot; Python</span>
+              <div>
+                <h3>Raspberry Pi Sensor Debug Toolkit</h3>
+                <p>A personal collection of tested Python drivers, I2C diagnostic scripts and wiring reference sheets for the sensors I've worked with: AS7343 (spectral), VL53L0X (ToF ranging), LJC18A3 (inductive proximity) and common servo controllers. Saves hours every time I start a new hardware project.</p>
+                <div class="project-highlights">
+                  <span class="highlight">Open Source</span>
+                  <span class="highlight">Driver Library</span>
+                  <span class="highlight">I2C Diagnostic</span>
+                </div>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Full-Stack -->
+          <article id="cat-fullstack" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">FS</span>
+              <h2>Full-Stack & Frontend</h2>
+            </div>
+
+            <div class="bento-item gs_reveal project-card">
+              <div class="project-number">03</div>
+              <span class="tag">Vue.js &middot; Tailwind CSS &middot; WebSockets &middot; Python Flask</span>
+              <div>
+                <h3>EcoSortNet Dashboard — Real-time Sensor Data Visualisation</h3>
+                <p>The frontend control panel for EcoSortNet. Built with Vue 3 Composition API and Tailwind CSS, it displays live sensor readings (spectral channels, distance, proximity state), classification results, sorting statistics and system health — all updating in real time via WebSocket from the Raspberry Pi backend.</p>
+                <div class="project-highlights">
+                  <span class="highlight">Vue 3 + Vite</span>
+                  <span class="highlight">Real-time WS</span>
+                  <span class="highlight">Digital Twin UI</span>
+                  <span class="highlight">Tailwind CSS</span>
+                </div>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link">GitHub ↗</a>
+                <a href="#" class="card-link card-link--primary">Live Demo ↗</a>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal project-card">
+              <div class="project-number">04</div>
+              <span class="tag">Vue.js &middot; Tailwind CSS &middot; Campus Network</span>
+              <div>
+                <h3>Campus Wi-Fi Captive Portal Redesign</h3>
+                <p>Redesigned a university campus Wi-Fi authentication portal. Replaced the legacy form with a clean Vue.js SPA backed by a lightweight Node.js proxy. Focused on mobile responsiveness, fast load on weak connections and clear bilingual (EN/ZH) copy.</p>
+                <div class="project-highlights">
+                  <span class="highlight">Vue.js SPA</span>
+                  <span class="highlight">Mobile First</span>
+                  <span class="highlight">Bilingual</span>
+                </div>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- AI / Agents -->
+          <article id="cat-ai" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">AI</span>
+              <h2>AI & Agents</h2>
+            </div>
+
+            <div class="bento-item gs_reveal project-card">
+              <div class="project-number">05 · Hackathon</div>
+              <span class="tag">AI Safety &middot; Open Source &middot; USM Hackathon 2026</span>
+              <div>
+                <h3>VHACK_TrustGuard-AI — AI Safety & Trust Protection</h3>
+                <p>Built with my team at USM Varsity Hackathon 2026. An open-source framework for AI trust and safety verification. I was responsible for the core logic and system integration: the threat classification pipeline, API layer and integration with the frontend trust-score dashboard. Competed against 40+ university teams.</p>
+                <div class="project-highlights">
+                  <span class="highlight">USM Hackathon</span>
+                  <span class="highlight">AI Safety</span>
+                  <span class="highlight">Open Source</span>
+                  <span class="highlight">Team Lead: Core Logic</span>
+                </div>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">GitHub ↗</a>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal project-card">
+              <div class="project-number">06</div>
+              <span class="tag">Vercel &middot; Edge Functions &middot; AI Agent &middot; Vue.js</span>
+              <div>
+                <h3>Personal AI Agent Infrastructure on Vercel</h3>
+                <p>My own production AI agent setup — a Vercel-deployed backend handling LLM API calls, prompt management, rate limiting and response caching, wired to a Vue.js frontend dashboard. This is the infrastructure backbone I use across multiple projects and experiments.</p>
+                <div class="project-highlights">
+                  <span class="highlight">Vercel Edge</span>
+                  <span class="highlight">LLM Proxy</span>
+                  <span class="highlight">Vue Frontend</span>
+                </div>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Blog Post ↗</a>
+                <a href="#" class="card-link">GitHub ↗</a>
+              </div>
+            </div>
+
+          </article>
+
+        </div>
+      </section>
+
+      <footer style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--bg-dark);">
+        <span class="gs_reveal">
+          <a href="/" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">← Back Home</a>
+          &nbsp;&middot;&nbsp; Xue Hao &middot; UTAR &middot; 2025
+        </span>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

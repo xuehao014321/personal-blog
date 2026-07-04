@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== SEO ===== -->
+    <title>Xue Hao | Embedded Systems & Full-Stack Developer, UTAR</title>
+    <meta name="description" content="Xue Hao (薛皓) — final-year Bachelor's student at UTAR Malaysia, specialising in Raspberry Pi embedded systems, sensor fusion, Vue.js full-stack development and AI agent infrastructure. Blog about hardware debugging, engineering thinking and building real systems." />
+    <meta name="keywords" content="Xue Hao, XUE HAO, 薛皓, UTAR, Raspberry Pi, embedded systems, sensor fusion, EcoSortNet, Vue.js, AI agent, Vercel, hardware debug, TRIZ, Malaysia developer" />
+    <meta name="author" content="Xue Hao" />
+    <link rel="canonical" href="https://haoxue.dev/" />
+
+    <!-- Open Graph (shows a rich card when shared on WeChat, LinkedIn etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://haoxue.dev/" />
+    <meta property="og:title" content="Xue Hao | Embedded Systems & Full-Stack Developer" />
+    <meta property="og:description" content="Final-year CS student at UTAR Malaysia. Building smart hardware systems, Vue.js dashboards and AI agent infrastructure. Blog: hardware debugging, sensor fusion, engineering thinking." />
+    <meta property="og:image" content="https://haoxue.dev/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hao Xue | Embedded Systems & Full-Stack Developer" />
+    <meta name="twitter:description" content="Smart hardware · Sensor fusion · Vue.js · AI agents · UTAR Malaysia" />
+
+    <!-- Structured Data (Google rich results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Xue Hao",
+      "alternateName": ["XUE HAO", "薛皓"],
+      "url": "https://haoxue.dev",
+      "jobTitle": "Final-Year Bachelor's Student in Digital Product Design",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Universiti Tunku Abdul Rahman (UTAR)"
+      },
+      "knowsAbout": ["Raspberry Pi", "Embedded Systems", "Sensor Fusion", "Vue.js", "Python", "AI Agents", "Full-Stack Development"],
+      "sameAs": ["https://github.com/xuehao"]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  </head>
+  <body>
+    <div class="noise"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header class="header">
+      <a href="/" class="logo magnetic">HX <span>dev</span></a>
+      <nav>
+        <ul>
+          <li><a href="/projects.html" class="magnetic-link">Projects</a></li>
+          <li><a href="#timeline-view" class="magnetic-link">Blog</a></li>
+          <li><a href="/about.html" class="magnetic-link">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero light-theme">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="line"><span class="line-inner">Build,</span></span>
+            <span class="line"><span class="line-inner">Debug &amp; Scale.</span></span>
+          </h1>
+          <p class="hero-subtitle">Hi, I'm Xue Hao — final-year CS student at UTAR Malaysia, hardware engineer & full-stack developer. I bridge sensors, backends and UIs into systems that actually work.</p>
+          <a href="#timeline-view" class="cta-button magnetic" data-cursor="-inverse">Read the Blog</a>
+        </div>
+        <div class="hero-visual">
+          <img src="/hero.png" alt="Hao Xue" class="hero-image" />
+        </div>
+        <div class="hero-fade-bottom"></div>
+      </section>
+
+      <!-- Wave Path Divider -->
+      <div class="wave-divider-container">
+        <div class="wave-hover-area"></div>
+        <svg class="wave-svg">
+          <path class="wave-path" stroke-width="1.5" />
+        </svg>
+      </div>
+
+      <!-- Blog section with Timeline sidebar -->
+      <section id="timeline-view" class="timeline-container dark-theme">
+
+        <!-- Left: Timeline sidebar -->
+        <aside class="sticky-sidebar">
+          <div class="timeline-track">
+
+            <div class="timeline-entry active" data-target="blog-2025">
+              <div class="timeline-dot"></div>
+              <div class="timeline-meta">
+                <span class="timeline-year">2025</span>
+                <span class="timeline-desc">MSc Year 1</span>
+              </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="timeline-entry" data-target="blog-2024">
+              <div class="timeline-dot"></div>
+              <div class="timeline-meta">
+                <span class="timeline-year">2024</span>
+                <span class="timeline-desc">Final Year</span>
+              </div>
+            </div>
+
+            <div class="timeline-connector"></div>
+
+            <div class="timeline-entry" data-target="blog-2023">
+              <div class="timeline-dot"></div>
+              <div class="timeline-meta">
+                <span class="timeline-year">2023</span>
+                <span class="timeline-desc">Junior Year</span>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        <!-- Right: Blog content -->
+        <div class="scroll-content">
+
+          <!-- 2025 posts -->
+          <article id="blog-2025" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">25</span>
+              <h2>2025</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Hardware Debug &middot; I2C &middot; Sensors</span>
+              <div>
+                <h3>Debugging the AS7343 spectral sensor: chip ID 0x24 and the driver rabbit hole</h3>
+                <p>A deep-dive into getting the AS7343 14-channel spectral sensor to reliably communicate over I2C on a Raspberry Pi. Covers chip ID verification (0x24), driver library quirks, and the measurement pipeline I finally settled on for EcoSortNet.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">14 min read</span>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Engineering Thinking &middot; TRIZ &middot; Method</span>
+              <div>
+                <h3>How TRIZ Level-1 changed the way I approach hardware problems</h3>
+                <p>After getting my TRIZ certification I started applying contradiction analysis to real engineering bottlenecks — from conveyor belt jams in EcoSortNet to sensor placement trade-offs. This is a practical breakdown of the thinking shift.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">10 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2024 posts -->
+          <article id="blog-2024" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">24</span>
+              <h2>2024</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Hackathon &middot; AI Safety &middot; USM 2026</span>
+              <div>
+                <h3>Building TrustGuard-AI at USM Varsity Hackathon — what we shipped in 24 hours</h3>
+                <p>Our team's experience at USM Varsity Hackathon 2026. I was responsible for the core logic and system integration of VHACK_TrustGuard-AI, an open-source repository focused on AI safety and trust protection. Here's the architecture, the trade-offs, and what I'd do differently.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">11 min read</span>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Full-Stack &middot; Vue.js &middot; Vercel</span>
+              <div>
+                <h3>Deploying an AI agent infrastructure on Vercel: my actual workflow</h3>
+                <p>A practical walkthrough of how I set up and manage AI agent deployments on Vercel — environment variables, edge functions, rate limiting, and how I wire the frontend Vue.js dashboard into the backend API. No fluff, just the steps that work.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">9 min read</span>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Embedded &middot; Raspberry Pi &middot; Python</span>
+              <div>
+                <h3>VL53L0X + LJC18A3: combining laser ranging and inductive proximity on one conveyor</h3>
+                <p>EcoSortNet needed two fundamentally different sensing modalities to work in sync. This is the wiring diagram, the timing logic in Python, and the edge cases that took me two weeks to iron out — so you don't have to.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">13 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2023 posts -->
+          <article id="blog-2023" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">23</span>
+              <h2>2023</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Vue.js &middot; Tailwind CSS &middot; Data Viz</span>
+              <div>
+                <h3>Building a real-time sensor data dashboard with Vue 3 and Tailwind</h3>
+                <p>From raw sensor readings piped over WebSockets to a live data visualisation dashboard. I cover the Vue 3 Composition API patterns, the Tailwind layout, and how to handle data that updates 10 times per second without the UI melting.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">10 min read</span>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Raspberry Pi &middot; Beginner &middot; Setup</span>
+              <div>
+                <h3>Raspberry Pi setup for sensor fusion projects: the guide I wish I had</h3>
+                <p>Everything from imaging the SD card and enabling I2C/SPI, to setting up a Python virtual environment, installing GPIO libraries, and testing your first sensor read — all in one place, in the order that actually makes sense.</p>
+              </div>
+              <div class="card-links">
+                <a href="#" class="card-link card-link--primary">Read Article ↗</a>
+                <span class="read-time">8 min read</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+      
+      <footer style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <span class="gs_reveal">Xue Hao &nbsp;&middot;&nbsp; UTAR Malaysia &nbsp;&middot;&nbsp; 2025 &nbsp;&middot;&nbsp;
+          <a href="/projects.html" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">Projects</a>
+          &nbsp;&middot;&nbsp;
+          <a href="/about.html" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">About</a>
+        </span>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

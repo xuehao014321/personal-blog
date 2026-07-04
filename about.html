@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ===== SEO ===== -->
+    <title>About Xue Hao | Final-Year Student, UTAR Malaysia — Embedded Systems & Full-Stack Dev</title>
+    <meta name="description" content="About Xue Hao (薛皓, XUE HAO) — final-year Bachelor's student at UTAR Malaysia. Specialises in Raspberry Pi embedded systems, multi-modal sensor fusion, Vue.js full-stack development and AI agent infrastructure. TRIZ Level-1 certified. Open to KL internships." />
+    <meta name="keywords" content="Xue Hao, XUE HAO, 薛皓, about, UTAR, Digital Product Design, bachelor, Malaysia, Raspberry Pi developer, sensor fusion, TRIZ certification, Vue.js developer, KL internship" />
+    <link rel="canonical" href="https://haoxue.dev/about.html" />
+    <meta property="og:title" content="About Xue Hao | Final-Year Student & Developer, UTAR Malaysia" />
+    <meta property="og:description" content="Final-year student at UTAR Malaysia specialising in embedded systems, sensor fusion and full-stack AI applications. TRIZ Level-1 certified. Open to internship opportunities in Kuala Lumpur." />
+    <meta property="og:url" content="https://haoxue.dev/about.html" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="page-dark">
+    <div class="noise"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <header class="header">
+      <a href="/" class="logo magnetic">HX <span>dev</span></a>
+      <nav>
+        <ul>
+          <li><a href="/projects.html" class="magnetic-link">Projects</a></li>
+          <li><a href="/#timeline-view" class="magnetic-link">Blog</a></li>
+          <li><a href="/about.html" class="magnetic-link active-nav">About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="page-hero dark-theme">
+        <div class="page-hero-inner">
+          <p class="page-eyebrow">Engineer · Builder · Researcher</p>
+          <h1 class="page-title">About Me</h1>
+          <p class="page-subtitle">I bridge hardware and software — from soldering sensors to deploying AI agents. Here's the longer version.</p>
+        </div>
+      </div>
+
+      <section class="projects-container dark-theme">
+
+        <aside class="sticky-sidebar">
+          <ul class="nav-dots">
+            <li class="nav-item active" data-target="about-bio">
+              <div class="nav-indicator"><span class="icon">Me</span></div>
+              <span class="nav-label">Bio</span>
+            </li>
+            <li class="nav-item" data-target="about-edu">
+              <div class="nav-indicator"><span class="icon">Edu</span></div>
+              <span class="nav-label">Education</span>
+            </li>
+            <li class="nav-item" data-target="about-skills">
+              <div class="nav-indicator"><span class="icon">Sk</span></div>
+              <span class="nav-label">Skills</span>
+            </li>
+            <li class="nav-item" data-target="about-contact">
+              <div class="nav-indicator"><span class="icon">Hi</span></div>
+              <span class="nav-label">Contact</span>
+            </li>
+          </ul>
+        </aside>
+
+        <div class="scroll-content">
+
+          <!-- Bio -->
+          <article id="about-bio" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">Me</span>
+              <h2>Who I am</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Background</span>
+              <div>
+                <h3>Xue Hao &nbsp;·&nbsp; 薛皓</h3>
+                <p>I'm a final-year Bachelor's student in Digital Product Design at Universiti Tunku Abdul Rahman (UTAR), Malaysia — Faculty of Information and Communication Technology.</p>
+                <p style="margin-top: 1rem;">My focus is at the intersection of intelligent hardware, embedded systems and AI applications. I'm genuinely excited about closing the gap between raw sensor data and useful, deployable systems — from designing hardware circuit topologies and writing Python drivers, to building the Vue.js dashboards that make the data make sense.</p>
+                <p style="margin-top: 1rem;">I believe good engineering means caring about every layer: the physical circuit, the firmware, the backend logic, the API design, and the UI that a real person actually uses.</p>
+                <p style="margin-top: 1rem; color: var(--accent-silver);">Currently open to IT internship opportunities in Kuala Lumpur.</p>
+              </div>
+              <div class="card-links">
+                <a href="mailto:haoxue@utar.edu.my" class="card-link card-link--primary">Say Hello ↗</a>
+                <a href="#" class="card-link">Resume PDF ↗</a>
+                <a href="#" class="card-link">GitHub ↗</a>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Blog Philosophy</span>
+              <div>
+                <h3>"Build, Debug, and Scale."</h3>
+                <p>I write about three things: <strong style="color: var(--text-primary);">Hardware Debugging</strong> — the deep-night sessions fighting I2C, chip IDs and sensor timing. <strong style="color: var(--text-primary);">Full-Stack Logs</strong> — Vue.js, Tailwind, Vercel, AI agent infrastructure. <strong style="color: var(--text-primary);">Engineering Thinking</strong> — how I use TRIZ methodology and systematic reasoning to attack technical bottlenecks.</p>
+                <p style="margin-top: 1rem;">If you're working with Raspberry Pi, sensor fusion or full-stack AI tools — you'll probably find something useful here.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Education -->
+          <article id="about-edu" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">Edu</span>
+              <h2>Education & Achievements</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Final Year · 2022 — 2026</span>
+              <div>
+                <h3>Universiti Tunku Abdul Rahman (UTAR)</h3>
+                <p style="color: var(--accent-silver); margin-top: 0.5rem;">Bachelor's Degree in Digital Product Design &nbsp;·&nbsp; Faculty of Information and Communication Technology</p>
+                <p style="margin-top: 0.75rem;">Final-year student focusing on intelligent hardware prototyping, embedded systems design and full-stack AI application deployment. Capstone project: EcoSortNet — a multi-modal sensor fusion waste sorting system.</p>
+                <div class="edu-stats">
+                  <div class="edu-stat">
+                    <span class="edu-stat-value">2026</span>
+                    <span class="edu-stat-label">Expected Grad.</span>
+                  </div>
+                  <div class="edu-stat">
+                    <span class="edu-stat-value">ICT</span>
+                    <span class="edu-stat-label">Faculty</span>
+                  </div>
+                  <div class="edu-stat">
+                    <span class="edu-stat-value">Final</span>
+                    <span class="edu-stat-label">Year</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Certification</span>
+              <div>
+                <h3>TRIZ Level-1 — Inventive Problem Solving</h3>
+                <p style="color: var(--accent-silver); margin-top: 0.5rem;">Theory of Inventive Problem Solving (TRIZ)</p>
+                <p style="margin-top: 0.75rem;">TRIZ is a systematic engineering methodology for resolving technical and physical contradictions. I use it to analyse trade-offs in hardware design, identify root causes of sensor failures, and structure solutions for problems that seem to have no clean answer. It's changed how I approach every complex technical decision.</p>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Hackathon · 2026</span>
+              <div>
+                <h3>USM Varsity Hackathon 2026</h3>
+                <p style="color: var(--accent-silver); margin-top: 0.5rem;">Universiti Sains Malaysia &nbsp;·&nbsp; On-site Workshop & Competition</p>
+                <p style="margin-top: 0.75rem;">Participated in the on-site workshop and competition. Led core logic and system integration development for VHACK_TrustGuard-AI — a team project focused on AI safety and trust protection. Competed against teams from universities across Malaysia.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Skills -->
+          <article id="about-skills" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">Sk</span>
+              <h2>Skills & Tech Stack</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Hardware & Embedded</span>
+              <div>
+                <h3>Intelligent Hardware Development</h3>
+                <div class="skills-bar-list">
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">Raspberry Pi · Python Hardware Drivers</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%"></div></div>
+                  </div>
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">I2C / SPI Sensor Integration (AS7343, VL53L0X, LJC18A3)</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%"></div></div>
+                  </div>
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">Servo Control (MG996R, SG90) · Hardware Debug</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%"></div></div>
+                  </div>
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">Circuit Topology Design · Multi-modal Sensor Fusion</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 78%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Full-Stack & Infra</span>
+              <div>
+                <h3>Software & Deployment</h3>
+                <div class="skills-bar-list">
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">Vue.js · Tailwind CSS · Frontend Development</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%"></div></div>
+                  </div>
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">Python · Flask · Backend APIs</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%"></div></div>
+                  </div>
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">Vercel · AI Agent Infrastructure Deployment</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 82%"></div></div>
+                  </div>
+                  <div class="skill-bar-item">
+                    <span class="skill-bar-label">SQL · C++ · Java (coursework level)</span>
+                    <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 70%"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Full Tech Stack</span>
+              <div>
+                <h3>Everything I work with</h3>
+                <div class="skills-grid">
+                  <div class="skill-group">
+                    <p class="skill-group-title">Hardware</p>
+                    <p>Raspberry Pi &middot; Arduino &middot; AS7343 &middot; VL53L0X &middot; LJC18A3 &middot; Servo Motors &middot; OpenCV</p>
+                  </div>
+                  <div class="skill-group">
+                    <p class="skill-group-title">Languages</p>
+                    <p>Python &middot; JavaScript &middot; C++ &middot; Java &middot; SQL &middot; HTML/CSS</p>
+                  </div>
+                  <div class="skill-group">
+                    <p class="skill-group-title">Frontend</p>
+                    <p>Vue.js &middot; Tailwind CSS &middot; Vite &middot; Bootstrap &middot; Data Visualisation</p>
+                  </div>
+                  <div class="skill-group">
+                    <p class="skill-group-title">Backend & Cloud</p>
+                    <p>Flask &middot; Node.js &middot; Vercel &middot; AI Agent Infra &middot; WebSockets</p>
+                  </div>
+                  <div class="skill-group">
+                    <p class="skill-group-title">Methodology</p>
+                    <p>TRIZ Level-1 &middot; Systems Thinking &middot; Hardware Debug &middot; IT Project Management</p>
+                  </div>
+                  <div class="skill-group">
+                    <p class="skill-group-title">Other</p>
+                    <p>Unity &middot; XR Development &middot; MIPS Assembly &middot; Cyber Security (coursework)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Contact -->
+          <article id="about-contact" class="content-section">
+            <div class="section-header">
+              <span class="section-badge">Hi</span>
+              <h2>Say Hello</h2>
+            </div>
+
+            <div class="bento-item gs_reveal">
+              <span class="tag">Open to IT internships in Kuala Lumpur · 2025–2026</span>
+              <div>
+                <h3>Let's connect</h3>
+                <p>I'm actively looking for IT internship opportunities in Kuala Lumpur — particularly roles in embedded systems, full-stack development or AI engineering. I'm a fast learner who prefers working on real systems with real constraints.</p>
+                <p style="margin-top: 1rem;">If you're working on interesting hardware, sensor projects, or AI infrastructure and want to talk shop — feel free to reach out. I'm also happy to connect with other Raspberry Pi and sensor fusion enthusiasts.</p>
+              </div>
+              <div class="card-links">
+                <a href="mailto:haoxue@utar.edu.my" class="card-link card-link--primary">Email Me ↗</a>
+                <a href="#" class="card-link">LinkedIn ↗</a>
+                <a href="#" class="card-link">GitHub ↗</a>
+                <a href="#" class="card-link">Resume PDF ↗</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <footer style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--bg-dark);">
+        <span class="gs_reveal">
+          <a href="/" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">← Back Home</a>
+          &nbsp;&middot;&nbsp; Hao Xue &middot; UTAR &middot; 2025
+        </span>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
