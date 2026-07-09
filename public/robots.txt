@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://personal-blog-zeta-blush.vercel.app/sitemap.xml
+Sitemap: https://xuehao.vercel.app/sitemap.xml
