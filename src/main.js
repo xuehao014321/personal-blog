@@ -1,4 +1,87 @@
 import './style.css'
+import { sanityClient, POSTS_QUERY } from './sanity.js'
+
+// ─── Render blog post card HTML ───────────────────────────────────────────────
+function renderPostCard(post) {
+  const tags = (post.tags || []).join(' · ')
+  const link = post.link || '#'
+  const readTime = post.readTime ? `<span class="read-time">${post.readTime} min read</span>` : ''
+  return `
+    <div class="bento-item gs_reveal" style="opacity:0;transform:translateY(40px)">
+      <span class="tag">${tags}</span>
+      <div>
+        <h3>${post.title}</h3>
+        <p>${post.excerpt || ''}</p>
+      </div>
+      <div class="card-links">
+        <a href="${link}" class="card-link card-link--primary" ${link !== '#' ? 'target="_blank" rel="noopener"' : ''}>Read Article ↗</a>
+        ${readTime}
+      </div>
+    </div>
+  `
+}
+
+// ─── Fetch posts from Sanity and inject into year containers ──────────────────
+async function loadBlogPosts() {
+  try {
+    const posts = await sanityClient.fetch(POSTS_QUERY)
+    if (!posts || posts.length === 0) return
+
+    // Group posts by year
+    const byYear = {}
+    posts.forEach(post => {
+      const y = post.year || 'other'
+      if (!byYear[y]) byYear[y] = []
+      byYear[y].push(post)
+    })
+
+    // Inject into DOM
+    Object.entries(byYear).forEach(([year, yearPosts]) => {
+      const container = document.getElementById(`posts-${year}`)
+      if (!container) return
+      container.innerHTML = yearPosts.map(renderPostCard).join('')
+    })
+
+    // Re-run GSAP ScrollTrigger for newly injected elements
+    gsap.utils.toArray('.gs_reveal').forEach(elem => {
+      // Only animate elements that haven't been set up yet
+      if (!elem.dataset.gsapReady) {
+        elem.dataset.gsapReady = 'true'
+        gsap.to(elem, {
+          scrollTrigger: {
+            trigger: elem,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+        })
+      }
+    })
+
+    // Re-wire spotlight hover on new cards
+    document.querySelectorAll('.bento-item').forEach(item => {
+      if (!item.dataset.spotlight) {
+        item.dataset.spotlight = 'true'
+        item.addEventListener('mousemove', e => {
+          const rect = item.getBoundingClientRect()
+          item.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+          item.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+        })
+      }
+    })
+
+    ScrollTrigger.refresh()
+  } catch (err) {
+    console.warn('Sanity fetch failed, blog posts will not load.', err)
+  }
+}
+
+// Load posts immediately
+loadBlogPosts()
+
 
 // 1. Initialize Lenis Smooth Scroll
 const lenis = new Lenis({
@@ -77,13 +160,16 @@ magneticElements.forEach(el => {
 
 // 3. Spotlight Hover effect for Bento Items
 document.querySelectorAll('.bento-item').forEach(item => {
-  item.addEventListener('mousemove', e => {
-    const rect = item.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    item.style.setProperty('--mouse-x', `${x}px`);
-    item.style.setProperty('--mouse-y', `${y}px`);
-  });
+  if (!item.dataset.spotlight) {
+    item.dataset.spotlight = 'true'
+    item.addEventListener('mousemove', e => {
+      const rect = item.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      item.style.setProperty('--mouse-x', `${x}px`);
+      item.style.setProperty('--mouse-y', `${y}px`);
+    });
+  }
 });
 
 
