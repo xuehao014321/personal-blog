@@ -1,5 +1,5 @@
 import './style.css'
-import { sanityClient, POSTS_QUERY } from './sanity.js'
+import { sanityClient, POSTS_QUERY, PROJECTS_QUERY } from './sanity.js'
 
 // ─── Render blog post card HTML ───────────────────────────────────────────────
 function renderPostCard(post) {
@@ -21,13 +21,85 @@ function renderPostCard(post) {
   `
 }
 
+// ─── Render project card HTML ─────────────────────────────────────────────────
+function renderProjectCard(project) {
+  const tags = (project.tags || []).join(' · ')
+  
+  // Format description (handle multiple paragraphs)
+  const descriptionHtml = (project.description || [])
+    .map((p, i) => `<p ${i > 0 ? 'style="margin-top: 0.75rem;"' : ''}>${p}</p>`)
+    .join('')
+
+  // Format highlights
+  const highlightsHtml = (project.highlights || [])
+    .map(h => `<span class="highlight">${h}</span>`)
+    .join('')
+
+  // Format links
+  let linksHtml = ''
+  if (project.githubLink) {
+    linksHtml += `<a href="${project.githubLink}" class="card-link" target="_blank">GitHub ↗</a>\n`
+  }
+  if (project.demoLink) {
+    linksHtml += `<a href="${project.demoLink}" class="card-link card-link--primary" target="_blank">Live Demo ↗</a>\n`
+  }
+  if (project.reportLink) {
+    linksHtml += `<a href="${project.reportLink}" class="card-link card-link--primary" target="_blank">Technical Report ↗</a>\n`
+  }
+
+  return `
+    <div class="bento-item gs_reveal project-card" style="opacity:0;transform:translateY(40px)">
+      <div class="project-number">${project.projectNumber || ''}</div>
+      <span class="tag">${tags}</span>
+      <div>
+        <h3>${project.title || ''}</h3>
+        ${descriptionHtml}
+        ${highlightsHtml ? `<div class="project-highlights">${highlightsHtml}</div>` : ''}
+      </div>
+      ${linksHtml ? `<div class="card-links">${linksHtml}</div>` : ''}
+    </div>
+  `
+}
+
+// ─── Shared function to wire up GSAP and hover effects ────────────────────────
+function wireUpInteractions() {
+  gsap.utils.toArray('.gs_reveal').forEach(elem => {
+    if (!elem.dataset.gsapReady) {
+      elem.dataset.gsapReady = 'true'
+      gsap.to(elem, {
+        scrollTrigger: {
+          trigger: elem,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse',
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power3.out',
+      })
+    }
+  })
+
+  document.querySelectorAll('.bento-item').forEach(item => {
+    if (!item.dataset.spotlight) {
+      item.dataset.spotlight = 'true'
+      item.addEventListener('mousemove', e => {
+        const rect = item.getBoundingClientRect()
+        item.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+        item.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+      })
+    }
+  })
+
+  ScrollTrigger.refresh()
+}
+
 // ─── Fetch posts from Sanity and inject into year containers ──────────────────
 async function loadBlogPosts() {
   try {
     const posts = await sanityClient.fetch(POSTS_QUERY)
     if (!posts || posts.length === 0) return
 
-    // Group posts by year
     const byYear = {}
     posts.forEach(post => {
       const y = post.year || 'other'
@@ -35,52 +107,49 @@ async function loadBlogPosts() {
       byYear[y].push(post)
     })
 
-    // Inject into DOM
+    let injected = false
     Object.entries(byYear).forEach(([year, yearPosts]) => {
       const container = document.getElementById(`posts-${year}`)
       if (!container) return
       container.innerHTML = yearPosts.map(renderPostCard).join('')
+      injected = true
     })
 
-    // Re-run GSAP ScrollTrigger for newly injected elements
-    gsap.utils.toArray('.gs_reveal').forEach(elem => {
-      // Only animate elements that haven't been set up yet
-      if (!elem.dataset.gsapReady) {
-        elem.dataset.gsapReady = 'true'
-        gsap.to(elem, {
-          scrollTrigger: {
-            trigger: elem,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
-          },
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          ease: 'power3.out',
-        })
-      }
-    })
-
-    // Re-wire spotlight hover on new cards
-    document.querySelectorAll('.bento-item').forEach(item => {
-      if (!item.dataset.spotlight) {
-        item.dataset.spotlight = 'true'
-        item.addEventListener('mousemove', e => {
-          const rect = item.getBoundingClientRect()
-          item.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-          item.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
-        })
-      }
-    })
-
-    ScrollTrigger.refresh()
+    if (injected) wireUpInteractions()
   } catch (err) {
     console.warn('Sanity fetch failed, blog posts will not load.', err)
   }
 }
 
-// Load posts immediately
+// ─── Fetch projects from Sanity and inject into category containers ───────────
+async function loadProjects() {
+  try {
+    const projects = await sanityClient.fetch(PROJECTS_QUERY)
+    if (!projects || projects.length === 0) return
+
+    const byCategory = { HW: [], FS: [], AI: [] }
+    projects.forEach(proj => {
+      const cat = proj.category || 'HW'
+      if (byCategory[cat]) byCategory[cat].push(proj)
+    })
+
+    let injected = false
+    Object.entries(byCategory).forEach(([cat, catProjects]) => {
+      const container = document.getElementById(`projects-${cat}`)
+      if (!container) return
+      container.innerHTML = catProjects.map(renderProjectCard).join('')
+      injected = true
+    })
+
+    if (injected) wireUpInteractions()
+  } catch (err) {
+    console.warn('Sanity fetch failed, projects will not load.', err)
+  }
+}
+
+// Load dynamic content
 loadBlogPosts()
+loadProjects()
 
 
 // 1. Initialize Lenis Smooth Scroll

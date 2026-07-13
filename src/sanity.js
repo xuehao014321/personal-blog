@@ -18,3 +18,17 @@ export const POSTS_QUERY = `
     "slug": slug.current
   }
 `
+
+export const PROJECTS_QUERY = `
+  *[_type == "project"] | order(projectNumber asc) {
+    title,
+    projectNumber,
+    category,
+    tags,
+    description,
+    highlights,
+    githubLink,
+    demoLink,
+    reportLink
+  }
+`
