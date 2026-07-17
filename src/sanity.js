@@ -32,3 +32,15 @@ export const PROJECTS_QUERY = `
     reportLink
   }
 `
+
+export const ABOUT_QUERY = `
+  *[_type == "aboutItem"] | order(orderNumber asc) {
+    title,
+    section,
+    tag,
+    subtitle,
+    description,
+    stats,
+    links
+  }
+`

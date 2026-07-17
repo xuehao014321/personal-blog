@@ -1,5 +1,5 @@
 import './style.css'
-import { sanityClient, POSTS_QUERY, PROJECTS_QUERY } from './sanity.js'
+import { sanityClient, POSTS_QUERY, PROJECTS_QUERY, ABOUT_QUERY } from './sanity.js'
 
 // ─── Render blog post card HTML ───────────────────────────────────────────────
 function renderPostCard(post) {
@@ -25,17 +25,14 @@ function renderPostCard(post) {
 function renderProjectCard(project) {
   const tags = (project.tags || []).join(' · ')
   
-  // Format description (handle multiple paragraphs)
   const descriptionHtml = (project.description || [])
     .map((p, i) => `<p ${i > 0 ? 'style="margin-top: 0.75rem;"' : ''}>${p}</p>`)
     .join('')
 
-  // Format highlights
   const highlightsHtml = (project.highlights || [])
     .map(h => `<span class="highlight">${h}</span>`)
     .join('')
 
-  // Format links
   let linksHtml = ''
   if (project.githubLink) {
     linksHtml += `<a href="${project.githubLink}" class="card-link" target="_blank">GitHub ↗</a>\n`
@@ -57,6 +54,49 @@ function renderProjectCard(project) {
         ${highlightsHtml ? `<div class="project-highlights">${highlightsHtml}</div>` : ''}
       </div>
       ${linksHtml ? `<div class="card-links">${linksHtml}</div>` : ''}
+    </div>
+  `
+}
+
+// ─── Render about item card HTML ──────────────────────────────────────────────
+function renderAboutCard(item) {
+  const subtitleHtml = item.subtitle ? `<p style="color: var(--accent-silver); margin-top: 0.5rem;">${item.subtitle}</p>` : ''
+  
+  const descriptionHtml = (item.description || [])
+    .map((p, i) => `<p style="margin-top: ${i === 0 && !item.subtitle ? '0' : '0.75rem'};">${p}</p>`)
+    .join('')
+
+  let statsHtml = ''
+  if (item.stats && item.stats.length > 0) {
+    const statsBoxes = item.stats.map(s => `
+      <div class="edu-stat">
+        <span class="edu-stat-value">${s.value}</span>
+        <span class="edu-stat-label">${s.label}</span>
+      </div>
+    `).join('')
+    statsHtml = `<div class="edu-stats">${statsBoxes}</div>`
+  }
+
+  let linksHtml = ''
+  if (item.links && item.links.length > 0) {
+    const linkItems = item.links.map(l => {
+      const cls = l.isPrimary ? 'card-link card-link--primary' : 'card-link'
+      const target = l.url && l.url.startsWith('http') ? 'target="_blank"' : ''
+      return `<a href="${l.url || '#'}" class="${cls}" ${target}>${l.title} ↗</a>`
+    }).join('\n')
+    linksHtml = `<div class="card-links">${linkItems}</div>`
+  }
+
+  return `
+    <div class="bento-item gs_reveal" style="opacity:0;transform:translateY(40px)">
+      <span class="tag">${item.tag || ''}</span>
+      <div>
+        <h3>${item.title || ''}</h3>
+        ${subtitleHtml}
+        ${descriptionHtml}
+        ${statsHtml}
+      </div>
+      ${linksHtml}
     </div>
   `
 }
@@ -147,9 +187,36 @@ async function loadProjects() {
   }
 }
 
+// ─── Fetch about items from Sanity and inject into section containers ─────────
+async function loadAboutItems() {
+  try {
+    const items = await sanityClient.fetch(ABOUT_QUERY)
+    if (!items || items.length === 0) return
+
+    const bySection = { bio: [], edu: [], skills: [] }
+    items.forEach(item => {
+      const sec = item.section || 'bio'
+      if (bySection[sec]) bySection[sec].push(item)
+    })
+
+    let injected = false
+    Object.entries(bySection).forEach(([sec, secItems]) => {
+      const container = document.getElementById(`about-${sec}-container`)
+      if (!container) return
+      container.innerHTML = secItems.map(renderAboutCard).join('')
+      injected = true
+    })
+
+    if (injected) wireUpInteractions()
+  } catch (err) {
+    console.warn('Sanity fetch failed, about items will not load.', err)
+  }
+}
+
 // Load dynamic content
 loadBlogPosts()
 loadProjects()
+loadAboutItems()
 
 
 // 1. Initialize Lenis Smooth Scroll
