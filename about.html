@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ===== SEO ===== -->
-    <title>About Xue Hao | Final-Year Student, UTAR Malaysia 鈥?Embedded Systems & Full-Stack Dev</title>
-    <meta name="description" content="About Xue Hao (钖涚殦, XUE HAO) 鈥?final-year Bachelor's student at UTAR Malaysia. Specialises in Raspberry Pi embedded systems, multi-modal sensor fusion, Vue.js full-stack development and AI agent infrastructure. TRIZ Level-1 certified. Open to KL internships." />
-    <meta name="keywords" content="Xue Hao, XUE HAO, 钖涚殦, about, UTAR, Digital Product Design, bachelor, Malaysia, Raspberry Pi developer, sensor fusion, TRIZ certification, Vue.js developer, KL internship" />
+    <title>About Xue Hao | Final-Year Student, UTAR Malaysia — Embedded Systems & Full-Stack Dev</title>
+    <meta name="description" content="About Xue Hao (薛皓, XUE HAO) — final-year Bachelor's student at UTAR Malaysia. Specialises in Raspberry Pi embedded systems, multi-modal sensor fusion, Vue.js full-stack development and AI agent infrastructure. TRIZ Level-1 certified. Open to KL internships." />
+    <meta name="keywords" content="Xue Hao, XUE HAO, 薛皓, about, UTAR, Digital Product Design, bachelor, Malaysia, Raspberry Pi developer, sensor fusion, TRIZ certification, Vue.js developer, KL internship" />
     <link rel="canonical" href="https://xuehao.vercel.app/about.html" />
     <meta property="og:title" content="About Xue Hao | Final-Year Student & Developer, UTAR Malaysia" />
     <meta property="og:description" content="Final-year student at UTAR Malaysia specialising in embedded systems, sensor fusion and full-stack AI applications. TRIZ Level-1 certified. Open to internship opportunities in Kuala Lumpur." />
@@ -20,19 +20,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <link rel="stylesheet" href="/src/style.css" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-</head>
+  </head>
   <body class="page-dark">
     <div class="noise"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
   <div id="splash-screen" style="position: fixed; inset: 0; background: #050506; z-index: 9999999; display: flex; justify-content: center; align-items: center; pointer-events: none;">
-    <img src="/Navbar Logo.svg" style="width: clamp(120px, 20vw, 300px); height: auto; filter: brightness(0) invert(1);" alt="Splash Logo" />
+    <img src="/Navbar Logo.svg" style="width: clamp(120px, 20vw, 300px); height: auto; filter: brightness(0) invert(1);" alt="Splash Logo" class="splash-glitch" />
   </div>
 
     <header class="header">
       <a href="/" class="navbar-logo-link">
-        <img src="/Navbar Logo.svg" class="navbar-logo-svg" width="48" height="48" alt="Logo" />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="navbar-logo-svg">
+          <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="butt">
+            <path d="M 10 10 L 40 30 L 40 70 L 10 90 L 10 70 L 40 50 L 10 30 Z" />
+            <path d="M 90 10 L 60 30 L 60 70 L 90 90 L 90 70 L 60 50 L 90 30 Z" />
+            <line x1="40" y1="35" x2="60" y2="35" />
+            <polyline points="40,50 50,60 60,50" />
+          </g>
+        </svg>
       </a>
       <nav>
         <ul>
@@ -46,9 +52,9 @@
     <main>
       <div class="page-hero dark-theme">
         <div class="page-hero-inner">
-          <p class="page-eyebrow">Engineer 路 Builder 路 Researcher</p>
+          <p class="page-eyebrow">Engineer · Builder · Researcher</p>
           <h1 class="page-title">About Me</h1>
-          <p class="page-subtitle">I bridge hardware and software 鈥?from soldering sensors to deploying AI agents. Here's the longer version.</p>
+          <p class="page-subtitle">I bridge hardware and software — from soldering sensors to deploying AI agents. Here's the longer version.</p>
         </div>
       </div>
 
@@ -115,17 +121,17 @@
             </div>
 
             <div class="bento-item gs_reveal">
-              <span class="tag">Open to IT internships in Kuala Lumpur 路 2025鈥?026</span>
+              <span class="tag">Open to IT internships in Kuala Lumpur · 2025–2026</span>
               <div>
                 <h3>Let's connect</h3>
-                <p>I'm actively looking for IT internship opportunities in Kuala Lumpur 鈥?particularly roles in embedded systems, full-stack development or AI engineering. I'm a fast learner who prefers working on real systems with real constraints.</p>
-                <p style="margin-top: 1rem;">If you're working on interesting hardware, sensor projects, or AI infrastructure and want to talk shop 鈥?feel free to reach out. I'm also happy to connect with other Raspberry Pi and sensor fusion enthusiasts.</p>
+                <p>I'm actively looking for IT internship opportunities in Kuala Lumpur — particularly roles in embedded systems, full-stack development or AI engineering. I'm a fast learner who prefers working on real systems with real constraints.</p>
+                <p style="margin-top: 1rem;">If you're working on interesting hardware, sensor projects, or AI infrastructure and want to talk shop — feel free to reach out. I'm also happy to connect with other Raspberry Pi and sensor fusion enthusiasts.</p>
               </div>
               <div class="card-links">
-                <a href="mailto:haoxue@utar.edu.my" class="card-link card-link--primary">Email Me 鈫?/a>
-                <a href="#" class="card-link">LinkedIn 鈫?/a>
-                <a href="https://github.com/xuehao014321" class="card-link" target="_blank">GitHub 鈫?/a>
-                <a href="#" class="card-link">Resume PDF 鈫?/a>
+                <a href="mailto:haoxue@utar.edu.my" class="card-link card-link--primary">Email Me ↗</a>
+                <a href="#" class="card-link">LinkedIn ↗</a>
+                <a href="https://github.com/xuehao014321" class="card-link" target="_blank">GitHub ↗</a>
+                <a href="#" class="card-link">Resume PDF ↗</a>
               </div>
             </div>
           </article>
@@ -135,7 +141,7 @@
 
       <footer style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--bg-dark);">
         <span class="gs_reveal">
-          <a href="/" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">鈫?Back Home</a>
+          <a href="/" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">← Back Home</a>
           &nbsp;&middot;&nbsp; Hao Xue &middot; UTAR &middot; 2025
         </span>
       </footer>

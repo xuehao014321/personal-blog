@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ===== SEO ===== -->
-    <title>Projects | Xue Hao 鈥?EcoSortNet, TrustGuard-AI, Sensor Fusion</title>
+    <title>Projects | Xue Hao — EcoSortNet, TrustGuard-AI, Sensor Fusion</title>
     <meta name="description" content="Xue Hao's engineering projects: EcoSortNet (multi-modal sensor fusion waste sorting on Raspberry Pi), TrustGuard-AI (USM Hackathon 2026 AI safety), Vue.js dashboards and AI agent infrastructure." />
-    <meta name="keywords" content="EcoSortNet, TrustGuard-AI, Xue Hao, XUE HAO, 钖涚殦, UTAR, Raspberry Pi sensor fusion, AS7343, VL53L0X, Vue.js dashboard, UTAR project" />
+    <meta name="keywords" content="EcoSortNet, TrustGuard-AI, Xue Hao, XUE HAO, 薛皓, UTAR, Raspberry Pi sensor fusion, AS7343, VL53L0X, Vue.js dashboard, UTAR project" />
     <link rel="canonical" href="https://xuehao.vercel.app/projects.html" />
     <meta property="og:title" content="Projects | Xue Hao" />
-    <meta property="og:description" content="EcoSortNet, TrustGuard-AI, Vue.js dashboards and more 鈥?real hardware and software projects by Xue Hao (UTAR)." />
+    <meta property="og:description" content="EcoSortNet, TrustGuard-AI, Vue.js dashboards and more — real hardware and software projects by Xue Hao (UTAR)." />
     <meta property="og:url" content="https://xuehao.vercel.app/projects.html" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,19 +20,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
     <link rel="stylesheet" href="/src/style.css" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-</head>
+  </head>
   <body class="page-dark">
     <div class="noise"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
   <div id="splash-screen" style="position: fixed; inset: 0; background: #050506; z-index: 9999999; display: flex; justify-content: center; align-items: center; pointer-events: none;">
-    <img src="/Navbar Logo.svg" style="width: clamp(120px, 20vw, 300px); height: auto; filter: brightness(0) invert(1);" alt="Splash Logo" />
+    <img src="/Navbar Logo.svg" style="width: clamp(120px, 20vw, 300px); height: auto; filter: brightness(0) invert(1);" alt="Splash Logo" class="splash-glitch" />
   </div>
 
     <header class="header">
       <a href="/" class="navbar-logo-link">
-        <img src="/Navbar Logo.svg" class="navbar-logo-svg" width="48" height="48" alt="Logo" />
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="navbar-logo-svg">
+          <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="butt">
+            <path d="M 10 10 L 40 30 L 40 70 L 10 90 L 10 70 L 40 50 L 10 30 Z" />
+            <path d="M 90 10 L 60 30 L 60 70 L 90 90 L 90 70 L 60 50 L 90 30 Z" />
+            <line x1="40" y1="35" x2="60" y2="35" />
+            <polyline points="40,50 50,60 60,50" />
+          </g>
+        </svg>
       </a>
       <nav>
         <ul>
@@ -46,9 +52,9 @@
     <main>
       <div class="page-hero dark-theme">
         <div class="page-hero-inner">
-          <p class="page-eyebrow">Hardware 路 Software 路 Systems</p>
+          <p class="page-eyebrow">Hardware · Software · Systems</p>
           <h1 class="page-title">Projects</h1>
-          <p class="page-subtitle">Real systems I've designed, wired, coded and debugged 鈥?from sensor fusion prototypes on Raspberry Pi to AI agent deployments on Vercel. Built as a final-year CS student at UTAR.</p>
+          <p class="page-subtitle">Real systems I've designed, wired, coded and debugged — from sensor fusion prototypes on Raspberry Pi to AI agent deployments on Vercel. Built as a final-year CS student at UTAR.</p>
         </div>
       </div>
 
@@ -81,12 +87,12 @@
             </div>
 
             <div class="bento-item gs_reveal project-card">
-              <div class="project-number">01 路 Featured Project</div>
+              <div class="project-number">01 · Featured Project</div>
               <span class="tag">Raspberry Pi &middot; Python &middot; AS7343 &middot; VL53L0X &middot; LJC18A3 &middot; Servo</span>
               <div>
-                <h3>EcoSortNet 鈥?Multi-Modal Sensor Fusion Waste Sorting System</h3>
+                <h3>EcoSortNet — Multi-Modal Sensor Fusion Waste Sorting System</h3>
                 <p>My MSc capstone project (supervised by Mr. Goh Hock Guan). A hierarchical waste classification prototype that fuses spectral data, laser ranging and inductive proximity sensing to autonomously sort waste into four categories on a conveyor belt.</p>
-                <p style="margin-top: 0.75rem;">I designed the full hardware circuit topology independently 鈥?MG996R and SG90 servo control, camera pipeline, AI classification integration, conveyor mechanics, anti-jam deflector and funnel system 鈥?and wrote all Python control logic from scratch.</p>
+                <p style="margin-top: 0.75rem;">I designed the full hardware circuit topology independently — MG996R and SG90 servo control, camera pipeline, AI classification integration, conveyor mechanics, anti-jam deflector and funnel system — and wrote all Python control logic from scratch.</p>
                 <div class="project-highlights">
                   <span class="highlight">AS7343 Spectral</span>
                   <span class="highlight">VL53L0X Ranging</span>
@@ -96,8 +102,8 @@
                 </div>
               </div>
               <div class="card-links">
-                <a href="https://github.com/xuehao014321" class="card-link" target="_blank">GitHub 鈫?/a>
-                <a href="#" class="card-link card-link--primary">Technical Report 鈫?/a>
+                <a href="https://github.com/xuehao014321" class="card-link" target="_blank">GitHub ↗</a>
+                <a href="#" class="card-link card-link--primary">Technical Report ↗</a>
               </div>
             </div>
 
@@ -114,7 +120,7 @@
                 </div>
               </div>
               <div class="card-links">
-                <a href="https://github.com/xuehao014321" class="card-link card-link--primary" target="_blank">GitHub 鈫?/a>
+                <a href="https://github.com/xuehao014321" class="card-link card-link--primary" target="_blank">GitHub ↗</a>
               </div>
             </div>
           </article>
@@ -144,7 +150,7 @@
 
       <footer style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--bg-dark);">
         <span class="gs_reveal">
-          <a href="/" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">鈫?Back Home</a>
+          <a href="/" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">← Back Home</a>
           &nbsp;&middot;&nbsp; Xue Hao &middot; UTAR &middot; 2025
         </span>
       </footer>

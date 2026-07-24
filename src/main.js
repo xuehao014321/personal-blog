@@ -1,4 +1,4 @@
-﻿import './style.css'
+import './style.css'
 import './glitch.css'
 import './bubble-menu.css'
 import './spiderverse-button.css'
@@ -523,16 +523,14 @@ if (skillBars.length > 0) {
 
 
 
-// Splash Screen Animation
+// ── Splash Screen Animation ──
 window.addEventListener('load', () => {
   const splash = document.getElementById('splash-screen');
-  if (splash) {
-    gsap.to(splash, {
-      opacity: 0,
-      duration: 0.8,
-      delay: 0.2,
-      ease: 'power2.inOut',
-      onComplete: () => splash.remove()
-    });
-  }
+  if (!splash) return;
+  // Wait for glitch to play (2.5s) then fade out
+  setTimeout(() => {
+    splash.style.transition = 'opacity 0.8s ease';
+    splash.style.opacity = '0';
+    setTimeout(() => { splash.style.display = 'none'; }, 800);
+  }, 2200);
 });
