@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   /* Dark Theme Colors */
   --bg-dark: #050506;
   --bg-surface: #1a1a1c;
@@ -747,3 +747,4 @@ body.page-dark {
 }
 
 .header { justify-content: flex-end; }
+

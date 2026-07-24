@@ -29,12 +29,6 @@ export function initBubbleMenu(containerSelector, options = {}) {
   // Build DOM
   container.innerHTML = `
     <nav class="bubble-menu ${useFixedPosition ? 'fixed' : 'absolute'}" aria-label="Main navigation">
-      <a href="/" class="bubble logo-bubble" aria-label="Logo" style="background: ${menuBg}; text-decoration: none;">
-        <span class="logo-content" style="font-weight: 700; color: ${menuContentColor};">
-          ${logo}
-        </span>
-      </a>
-
       <button type="button" class="bubble toggle-bubble menu-btn" aria-label="${menuAriaLabel}" style="background: ${menuBg}">
         <span class="menu-line" style="background: ${menuContentColor}"></span>
         <span class="menu-line short" style="background: ${menuContentColor}"></span>

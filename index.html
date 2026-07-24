@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,9 +8,9 @@
   <!-- ===== SEO ===== -->
   <title>Xue Hao | Embedded Systems & Full-Stack Developer, UTAR</title>
   <meta name="description"
-    content="Xue Hao (薛皓) — final-year Bachelor's student at UTAR Malaysia, specialising in Raspberry Pi embedded systems, sensor fusion, Vue.js full-stack development and AI agent infrastructure. Blog about hardware debugging, engineering thinking and building real systems." />
+    content="Xue Hao (钖涚殦) 鈥?final-year Bachelor's student at UTAR Malaysia, specialising in Raspberry Pi embedded systems, sensor fusion, Vue.js full-stack development and AI agent infrastructure. Blog about hardware debugging, engineering thinking and building real systems." />
   <meta name="keywords"
-    content="Xue Hao, XUE HAO, 薛皓, UTAR, Raspberry Pi, embedded systems, sensor fusion, EcoSortNet, Vue.js, AI agent, Vercel, hardware debug, TRIZ, Malaysia developer" />
+    content="Xue Hao, XUE HAO, 钖涚殦, UTAR, Raspberry Pi, embedded systems, sensor fusion, EcoSortNet, Vue.js, AI agent, Vercel, hardware debug, TRIZ, Malaysia developer" />
   <meta name="author" content="Xue Hao" />
   <link rel="canonical" href="https://xuehao.vercel.app/" />
 
@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Syne:wght@800&display=swap" rel="stylesheet">
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hao Xue | Embedded Systems & Full-Stack Developer" />
-  <meta name="twitter:description" content="Smart hardware · Sensor fusion · Vue.js · AI agents · UTAR Malaysia" />
+  <meta name="twitter:description" content="Smart hardware 路 Sensor fusion 路 Vue.js 路 AI agents 路 UTAR Malaysia" />
 
   <!-- Structured Data (Google rich results) -->
   <script type="application/ld+json">
@@ -36,7 +36,7 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Xue Hao",
-      "alternateName": ["XUE HAO", "薛皓"],
+      "alternateName": ["XUE HAO", "钖涚殦"],
       "url": "https://xuehao.vercel.app",
       "jobTitle": "Final-Year Bachelor's Student in Digital Product Design",
       "affiliation": {
@@ -54,23 +54,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
 
 <body>
   <div class="noise"></div>
   <div class="cursor-dot"></div>
   <div class="cursor-outline"></div>
+  <div id="splash-screen" style="position: fixed; inset: 0; background: #050506; z-index: 9999999; display: flex; justify-content: center; align-items: center; pointer-events: none;">
+    <img src="/Navbar Logo.svg" style="width: clamp(120px, 20vw, 300px); height: auto; filter: brightness(0) invert(1);" alt="Splash Logo" />
+  </div>
 
   <!-- Custom Top-Left Logo -->
   <a href="/" class="navbar-logo-link">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="navbar-logo-svg">
-      <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="butt">
-        <path d="M 10 10 L 40 30 L 40 70 L 10 90 L 10 70 L 40 50 L 10 30 Z" />
-        <path d="M 90 10 L 60 30 L 60 70 L 90 90 L 90 70 L 60 50 L 90 30 Z" />
-        <line x1="40" y1="35" x2="60" y2="35" />
-        <polyline points="40,50 50,60 60,50" />
-      </g>
-    </svg>
+    <img src="/Navbar Logo.svg" class="navbar-logo-svg" width="48" height="48" alt="Logo" />
   </a>
 
   <div id="bubble-menu-container"></div>
