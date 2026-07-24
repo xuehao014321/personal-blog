@@ -721,3 +721,29 @@ body.page-dark {
   z-index: 50;
   pointer-events: none;
 }
+/* Custom Navbar Logo */
+.navbar-logo-link {
+  position: fixed;
+  top: 35px;
+  left: 40px;
+  z-index: 100000;
+  display: block;
+  mix-blend-mode: difference;
+  color: #ffffff;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease, color 0.4s ease;
+  pointer-events: auto;
+}
+
+.navbar-logo-link:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.9));
+  color: #00f3ff;
+}
+
+.navbar-logo-svg {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.header { justify-content: flex-end; }
