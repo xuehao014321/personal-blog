@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Dominant Showcase | Apple-style Scroll</title>
+    
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background-color: #050508;
+        color: #ffffff;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+
+      /* Fullscreen Fixed Canvas */
+      #webgl-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      /* Scroll Container */
+      .scroll-container {
+        position: relative;
+        z-index: 2;
+      }
+
+      .scene-section {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 0 8vw;
+        box-sizing: border-box;
+      }
+
+      /* Alternating Layouts */
+      .layout-right {
+        justify-content: flex-end;
+      }
+
+      .layout-left {
+        justify-content: flex-start;
+      }
+
+      .layout-center {
+        justify-content: center;
+        text-align: center;
+      }
+
+      /* Text Cards with Glassmorphism */
+      .text-card {
+        max-width: 480px;
+        background: rgba(10, 10, 15, 0.45);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        padding: 2.5rem;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        pointer-events: auto;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.35rem 1rem;
+        border-radius: 20px;
+        background: rgba(255, 64, 129, 0.15);
+        color: #ff4081;
+        border: 1px solid rgba(255, 64, 129, 0.3);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+
+      .title {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 800;
+        line-height: 1.05;
+        margin: 0 0 1rem 0;
+        letter-spacing: -0.02em;
+        overflow: hidden;
+      }
+
+      /* GSAP Character Spans */
+      .char {
+        display: inline-block;
+        will-change: transform, opacity, filter;
+      }
+
+      .desc {
+        font-size: 1.05rem;
+        color: #9a9a9e;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      #loading {
+        position: fixed;
+        inset: 0;
+        background: #050508;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ff4081;
+        font-family: monospace;
+        font-size: 1.2rem;
+        transition: opacity 0.8s;
+      }
+
+      .back-nav {
+        position: fixed;
+        top: 2rem;
+        left: 2rem;
+        z-index: 100;
+        color: white;
+        text-decoration: none;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        padding: 0.6rem 1.2rem;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.1);
+        transition: background 0.3s;
+      }
+      .back-nav:hover {
+        background: rgba(255,255,255,0.15);
+      }
+
+      /* BGM Toggle Button */
+      .bgm-btn {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        z-index: 100;
+        color: white;
+        font-family: inherit;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        padding: 0.6rem 1.2rem;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .bgm-btn:hover {
+        background: rgba(255, 64, 129, 0.2);
+        border-color: rgba(255, 64, 129, 0.4);
+        box-shadow: 0 0 15px rgba(255, 64, 129, 0.3);
+      }
+      .bgm-btn.playing {
+        background: rgba(0, 255, 204, 0.15);
+        border-color: rgba(0, 255, 204, 0.3);
+        color: #00ffcc;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/" class="back-nav">← Back to Home</a>
+    
+    <div id="loading">Loading 3D Engine... 0%</div>
+
+    <!-- Background Music Player -->
+    <button id="bgm-toggle" class="bgm-btn">
+      <span class="icon">🔇</span> Music: Off
+    </button>
+    <audio id="bgm" autoplay loop>
+      <!-- The user will drop their own love-point.mp3 here -->
+      <source src="/audio/love-point.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Centered Dominant Canvas -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Scroll Sections with Alternating Layout -->
+    <div class="scroll-container">
+      
+      <!-- Stage 1: Full Body (Right Text Layout) -->
+      <section class="scene-section layout-right" id="stage-1">
+        <div class="text-card">
+          <span class="badge">01 / Full Body</span>
+          <h2 class="title gsap-split" id="title-1">DOMINANT PRESENCE.</h2>
+          <p class="desc gsap-desc" id="desc-1">The 3D model takes central dominance. Scroll down to experience cinematic camera tracking across four distinct angles.</p>
+        </div>
+      </section>
+
+      <!-- Stage 2: Front Face Close Up (Right Text Layout, Model Left Shift) -->
+      <section class="scene-section layout-right" id="stage-2">
+        <div class="text-card">
+          <span class="badge">02 / Close Up</span>
+          <h2 class="title gsap-split" id="title-2">FACIAL DETAIL.</h2>
+          <p class="desc gsap-desc" id="desc-2">The camera dollies directly into the facial geometry, revealing intricate surface textures and lighting highlights.</p>
+        </div>
+      </section>
+
+      <!-- Stage 3: Side Profile (Left Text Layout, Model Right Shift) -->
+      <section class="scene-section layout-left" id="stage-3">
+        <div class="text-card">
+          <span class="badge">03 / Profile</span>
+          <h2 class="title gsap-split" id="title-3">SIDE SILHOUETTE.</h2>
+          <p class="desc gsap-desc" id="desc-3">Rotated 90 degrees gracefully to showcase the lateral profile under rim lighting and ambient bounce.</p>
+        </div>
+      </section>
+
+      <!-- Stage 4: 3D Orbital Text Ring (Interactive 3D Drag Control) -->
+      <section class="scene-section layout-center" id="stage-4">
+        <div id="drag-hint" style="position: absolute; bottom: 8vh; padding: 0.6rem 1.4rem; background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border-radius: 30px; border: 1px solid rgba(255,64,129,0.4); color: #00ffcc; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em; pointer-events: none; opacity: 0; transition: opacity 0.6s;">
+          🖱️ Drag to Rotate | Hold Ctrl + Scroll to Zoom
+        </div>
+      </section>
+
+      <!-- Bottom scroll spacer for silky smooth boundary scrubbing -->
+      <div style="height: 40vh;"></div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script type="module" src="/src/3d-demo.js"></script>
+  </body>
+</html>

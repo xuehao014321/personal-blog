@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ===== SEO ===== -->
-    <title>Xue Hao | Embedded Systems & Full-Stack Developer, UTAR</title>
-    <meta name="description" content="Xue Hao (薛皓) — final-year Bachelor's student at UTAR Malaysia, specialising in Raspberry Pi embedded systems, sensor fusion, Vue.js full-stack development and AI agent infrastructure. Blog about hardware debugging, engineering thinking and building real systems." />
-    <meta name="keywords" content="Xue Hao, XUE HAO, 薛皓, UTAR, Raspberry Pi, embedded systems, sensor fusion, EcoSortNet, Vue.js, AI agent, Vercel, hardware debug, TRIZ, Malaysia developer" />
-    <meta name="author" content="Xue Hao" />
-    <link rel="canonical" href="https://xuehao.vercel.app/" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Open Graph (shows a rich card when shared on WeChat, LinkedIn etc.) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://xuehao.vercel.app/" />
-    <meta property="og:title" content="Xue Hao | Embedded Systems & Full-Stack Developer" />
-    <meta property="og:description" content="Final-year CS student at UTAR Malaysia. Building smart hardware systems, Vue.js dashboards and AI agent infrastructure. Blog: hardware debugging, sensor fusion, engineering thinking." />
-    <meta property="og:image" content="https://xuehao.vercel.app/hero.png" />
+  <!-- ===== SEO ===== -->
+  <title>Xue Hao | Embedded Systems & Full-Stack Developer, UTAR</title>
+  <meta name="description"
+    content="Xue Hao (薛皓) — final-year Bachelor's student at UTAR Malaysia, specialising in Raspberry Pi embedded systems, sensor fusion, Vue.js full-stack development and AI agent infrastructure. Blog about hardware debugging, engineering thinking and building real systems." />
+  <meta name="keywords"
+    content="Xue Hao, XUE HAO, 薛皓, UTAR, Raspberry Pi, embedded systems, sensor fusion, EcoSortNet, Vue.js, AI agent, Vercel, hardware debug, TRIZ, Malaysia developer" />
+  <meta name="author" content="Xue Hao" />
+  <link rel="canonical" href="https://xuehao.vercel.app/" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Hao Xue | Embedded Systems & Full-Stack Developer" />
-    <meta name="twitter:description" content="Smart hardware · Sensor fusion · Vue.js · AI agents · UTAR Malaysia" />
+  <!-- Open Graph (shows a rich card when shared on WeChat, LinkedIn etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://xuehao.vercel.app/" />
+  <meta property="og:title" content="Xue Hao | Embedded Systems & Full-Stack Developer" />
+  <meta property="og:description"
+    content="Final-year CS student at UTAR Malaysia. Building smart hardware systems, Vue.js dashboards and AI agent infrastructure. Blog: hardware debugging, sensor fusion, engineering thinking." />
+  <meta property="og:image" content="https://xuehao.vercel.app/hero.png" />
 
-    <!-- Structured Data (Google rich results) -->
-    <script type="application/ld+json">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hao Xue | Embedded Systems & Full-Stack Developer" />
+  <meta name="twitter:description" content="Smart hardware · Sensor fusion · Vue.js · AI agents · UTAR Malaysia" />
+
+  <!-- Structured Data (Google rich results) -->
+  <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
@@ -41,152 +48,168 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-  </head>
-  <body>
-    <div class="noise"></div>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+</head>
 
-    <header class="header">
-      <a href="/" class="logo magnetic">HX <span>dev</span></a>
-      <nav>
-        <ul>
-          <li><a href="/projects.html" class="magnetic-link">Projects</a></li>
-          <li><a href="#timeline-view" class="magnetic-link">Blog</a></li>
-          <li><a href="/about.html" class="magnetic-link">About</a></li>
-        </ul>
-      </nav>
-    </header>
+<body>
+  <div class="noise"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
-    <main>
-      <section class="hero light-theme">
-        <div class="hero-content">
-          <h1 class="hero-title">
-            <span class="line"><span class="line-inner">Build,</span></span>
-            <span class="line"><span class="line-inner">Debug &amp; Scale.</span></span>
-          </h1>
-          <p class="hero-subtitle">Hi, I'm Xue Hao — final-year CS student at UTAR Malaysia, hardware engineer & full-stack developer. I bridge sensors, backends and UIs into systems that actually work.</p>
-          <a href="#timeline-view" class="cta-button magnetic" data-cursor="-inverse">Read the Blog</a>
+  <div id="bubble-menu-container"></div>
+
+  <main>
+    <section class="hero light-theme">
+      <div class="hero-content"
+        style="width: 100%; position: absolute; height: 105vh; z-index: 10; pointer-events: none; mix-blend-mode: normal;">
+
+        <!-- Scrambled Text (3 Lines, Transparent Background, High Contrast) -->
+        <div class="scrambled-text-wrapper">
+          <div class="scramble-line">SMART HARDWARE & EMBEDDED SYSTEMS</div>
+          <div class="scramble-line">SENSOR FUSION & AI AGENTS</div>
+          <div class="scramble-line">FULL-STACK WEB DEVELOPMENT</div>
         </div>
-        <div class="hero-visual">
-          <img src="/hero.png" alt="Hao Xue" class="hero-image" />
-        </div>
-        <div class="hero-fade-bottom"></div>
-      </section>
 
-      <!-- Wave Path Divider -->
-      <div class="wave-divider-container">
-        <div class="wave-hover-area"></div>
-        <svg class="wave-svg">
-          <path class="wave-path" stroke-width="1.5" />
-        </svg>
+        <!-- Glitch Text positioned to block the eyes (precisely adjusted with absolute positioning) -->
+        <div class="glitch"
+          style="position: absolute; top: 42%; left: 49%; transform: translate(-50%, -50%); font-size: clamp(3rem, 10vw, 8rem); letter-spacing: -0.05em; pointer-events: auto;"
+          data-text="Xue Hao">Xue Hao</div>
+          
+        <div class="button-wrapper" style="position: absolute; top: 65%; left: 50%; transform: translateX(-50%); pointer-events: auto; z-index: 20;">
+          <button class="spiderverse-button">
+            <div class="glitch-text">
+              DISCOVER MY WORK
+            </div>
+            <div class="glitch-layers">
+              <div class="glitch-layer layer-1">DISCOVER MY WORK</div>
+              <div class="glitch-layer layer-2">DISCOVER MY WORK</div>
+            </div>
+            <div class="noise"></div>
+            <div class="glitch-slice"></div>
+          </button>
+        </div>
       </div>
+      <div class="hero-visual">
+        <img src="/hero.png" alt="Hao Xue" class="hero-image" />
+      </div>
+      <div class="hero-fade-bottom"></div>
+    </section>
 
-      <!-- Blog section with Timeline sidebar -->
-      <section id="timeline-view" class="timeline-container dark-theme">
+    <!-- Wave Path Divider -->
+    <div class="wave-divider-container">
+      <div class="wave-hover-area"></div>
+      <svg class="wave-svg">
+        <path class="wave-path" stroke-width="1.5" />
+      </svg>
+    </div>
 
-        <!-- Left: Timeline sidebar -->
-        <aside class="sticky-sidebar">
-          <div class="timeline-track">
+    <!-- Blog section with Timeline sidebar -->
+    <section id="timeline-view" class="timeline-container dark-theme">
 
-            <div class="timeline-entry active" data-target="blog-2026">
-              <div class="timeline-dot"></div>
-              <div class="timeline-meta">
-                <span class="timeline-year">2026</span>
-                <span class="timeline-desc">Final Year</span>
-              </div>
+      <!-- Left: Timeline sidebar -->
+      <aside class="sticky-sidebar">
+        <div class="timeline-track">
+
+          <div class="timeline-entry active" data-target="blog-2026">
+            <div class="timeline-dot"></div>
+            <div class="timeline-meta">
+              <span class="timeline-year">2026</span>
+              <span class="timeline-desc">Final Year</span>
             </div>
-
-            <div class="timeline-connector"></div>
-
-            <div class="timeline-entry" data-target="blog-2025">
-              <div class="timeline-dot"></div>
-              <div class="timeline-meta">
-                <span class="timeline-year">2025</span>
-                <span class="timeline-desc">Senior Year</span>
-              </div>
-            </div>
-
-            <div class="timeline-connector"></div>
-
-            <div class="timeline-entry" data-target="blog-2024">
-              <div class="timeline-dot"></div>
-              <div class="timeline-meta">
-                <span class="timeline-year">2024</span>
-                <span class="timeline-desc">Final Year</span>
-              </div>
-            </div>
-
-            <div class="timeline-connector"></div>
-
-            <div class="timeline-entry" data-target="blog-2023">
-              <div class="timeline-dot"></div>
-              <div class="timeline-meta">
-                <span class="timeline-year">2023</span>
-                <span class="timeline-desc">Junior Year</span>
-              </div>
-            </div>
-
           </div>
-        </aside>
 
-        <!-- Right: Blog content -->
-        <div class="scroll-content">
+          <div class="timeline-connector"></div>
 
-          <!-- 2026 posts -->
-          <article id="blog-2026" class="content-section">
-            <div class="section-header">
-              <span class="section-badge">26</span>
-              <h2>2026</h2>
+          <div class="timeline-entry" data-target="blog-2025">
+            <div class="timeline-dot"></div>
+            <div class="timeline-meta">
+              <span class="timeline-year">2025</span>
+              <span class="timeline-desc">Senior Year</span>
             </div>
-            <div class="posts-container" id="posts-2026"></div>
-          </article>
+          </div>
 
-          <!-- 2025 posts -->
-          <article id="blog-2025" class="content-section">
-            <div class="section-header">
-              <span class="section-badge">25</span>
-              <h2>2025</h2>
-            </div>
-            <div class="posts-container" id="posts-2025"></div>
-          </article>
+          <div class="timeline-connector"></div>
 
-          <!-- 2024 posts -->
-          <article id="blog-2024" class="content-section">
-            <div class="section-header">
-              <span class="section-badge">24</span>
-              <h2>2024</h2>
+          <div class="timeline-entry" data-target="blog-2024">
+            <div class="timeline-dot"></div>
+            <div class="timeline-meta">
+              <span class="timeline-year">2024</span>
+              <span class="timeline-desc">Final Year</span>
             </div>
-            <div class="posts-container" id="posts-2024"></div>
-          </article>
+          </div>
 
-          <!-- 2023 posts -->
-          <article id="blog-2023" class="content-section">
-            <div class="section-header">
-              <span class="section-badge">23</span>
-              <h2>2023</h2>
+          <div class="timeline-connector"></div>
+
+          <div class="timeline-entry" data-target="blog-2023">
+            <div class="timeline-dot"></div>
+            <div class="timeline-meta">
+              <span class="timeline-year">2023</span>
+              <span class="timeline-desc">Junior Year</span>
             </div>
-            <div class="posts-container" id="posts-2023"></div>
-          </article>
+          </div>
 
         </div>
-      </section>
-      
-      <footer style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
-        <span class="gs_reveal">Xue Hao &nbsp;&middot;&nbsp; UTAR Malaysia &nbsp;&middot;&nbsp; 2026 &nbsp;&middot;&nbsp;
-          <a href="/projects.html" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">Projects</a>
-          &nbsp;&middot;&nbsp;
-          <a href="/about.html" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">About</a>
-        </span>
-      </footer>
-    </main>
+      </aside>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+      <!-- Right: Blog content -->
+      <div class="scroll-content">
+
+        <!-- 2026 posts -->
+        <article id="blog-2026" class="content-section">
+          <div class="section-header">
+            <span class="section-badge">26</span>
+            <h2>2026</h2>
+          </div>
+          <div class="posts-container" id="posts-2026"></div>
+        </article>
+
+        <!-- 2025 posts -->
+        <article id="blog-2025" class="content-section">
+          <div class="section-header">
+            <span class="section-badge">25</span>
+            <h2>2025</h2>
+          </div>
+          <div class="posts-container" id="posts-2025"></div>
+        </article>
+
+        <!-- 2024 posts -->
+        <article id="blog-2024" class="content-section">
+          <div class="section-header">
+            <span class="section-badge">24</span>
+            <h2>2024</h2>
+          </div>
+          <div class="posts-container" id="posts-2024"></div>
+        </article>
+
+        <!-- 2023 posts -->
+        <article id="blog-2023" class="content-section">
+          <div class="section-header">
+            <span class="section-badge">23</span>
+            <h2>2023</h2>
+          </div>
+          <div class="posts-container" id="posts-2023"></div>
+        </article>
+
+      </div>
+    </section>
+
+    <footer
+      style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+      <span class="gs_reveal">Xue Hao &nbsp;&middot;&nbsp; UTAR Malaysia &nbsp;&middot;&nbsp; 2026 &nbsp;&middot;&nbsp;
+        <a href="/projects.html"
+          style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">Projects</a>
+        &nbsp;&middot;&nbsp;
+        <a href="/about.html" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">About</a>
+      </span>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

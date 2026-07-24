@@ -711,3 +711,13 @@ body.page-dark {
   /* width set inline, transition handles it */
 }
 
+/* 3D Background Canvas */
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  pointer-events: none;
+}

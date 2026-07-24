@@ -1,5 +1,31 @@
 import './style.css'
+import './glitch.css'
+import './bubble-menu.css'
+import './spiderverse-button.css'
+import './scrambled-text.css'
 import { sanityClient, POSTS_QUERY, PROJECTS_QUERY, ABOUT_QUERY } from './sanity.js'
+import { initAsciiText } from './ascii-text.js'
+import { initBubbleMenu } from './bubble-menu.js'
+import { initScrambledText } from './scrambled-text.js'
+
+// Initialize Navigation Menu
+initBubbleMenu('#bubble-menu-container', {
+  logo: 'HX',
+  menuBg: '#ffffff',
+  menuContentColor: '#111111'
+});
+
+// Initialize Scrambled Text (3 lines)
+initScrambledText('.scramble-line', {
+  radius: 120,
+  duration: 1.2,
+  speed: 0.6,
+  scrambleChars: '01.:/\\|'
+});
+
+// Initialize ASCII Text for Homepage Hero
+initAsciiText('#hero-ascii-left', '薛');
+initAsciiText('#hero-ascii-right', '皓');
 
 // ─── Render blog post card HTML ───────────────────────────────────────────────
 function renderPostCard(post) {
@@ -493,4 +519,5 @@ if (skillBars.length > 0) {
     });
   });
 }
+
 
