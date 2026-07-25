@@ -49,7 +49,7 @@ export function init3DScene() {
   const loader = new GLTFLoader()
 
   loader.load(
-    '/models/kitty.glb',
+    '/models/model.glb',
     (gltf) => {
       model = gltf.scene
       model.updateMatrixWorld(true)
@@ -72,7 +72,7 @@ export function init3DScene() {
     },
     undefined,
     (err) => {
-      console.warn('Could not load /models/kitty.glb, fallback to knot geometry.', err)
+      console.warn('Could not load /models/model.glb, fallback to knot geometry.', err)
       const geometry = new THREE.TorusKnotGeometry(1.2, 0.38, 200, 32)
       const material = new THREE.MeshStandardMaterial({
         color: 0x222222, roughness: 0.15, metalness: 0.9
