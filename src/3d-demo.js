@@ -71,7 +71,7 @@ let model = null
 const loader = new GLTFLoader()
 
 loader.load(
-  '/models/model.glb', // User 3D Model
+  '/models/kitty.glb', // User Kitty 3D Model
   (gltf) => {
     model = gltf.scene
     model.updateMatrixWorld(true) // Force Matrix World update for accurate Box3
