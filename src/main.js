@@ -7,6 +7,10 @@ import { sanityClient, POSTS_QUERY, PROJECTS_QUERY, ABOUT_QUERY } from './sanity
 import { initAsciiText } from './ascii-text.js'
 import { initBubbleMenu } from './bubble-menu.js'
 import { initScrambledText } from './scrambled-text.js'
+import { init3DScene } from './3d-scene.js'
+
+// Initialize 3D WebGL Background Scene (model.glb)
+init3DScene();
 
 // Initialize Navigation Menu
 initBubbleMenu('#bubble-menu-container', {

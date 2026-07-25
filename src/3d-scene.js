@@ -1,0 +1,164 @@
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+export function init3DScene() {
+  const canvas = document.querySelector('#webgl-canvas')
+  if (!canvas) return
+
+  // Scene & Camera
+  const scene = new THREE.Scene()
+  const cameraGroup = new THREE.Group()
+  scene.add(cameraGroup)
+
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100)
+  camera.position.set(0, 0, 4.2)
+  cameraGroup.add(camera)
+
+  // WebGL Renderer
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true
+  })
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.toneMappingExposure = 1.3
+
+  // Lighting
+  const keyLight = new THREE.DirectionalLight(0xffffff, 2.8)
+  keyLight.position.set(5, 5, 5)
+  scene.add(keyLight)
+
+  const pinkLight = new THREE.DirectionalLight(0xff4081, 2.2)
+  pinkLight.position.set(-5, -2, 4)
+  scene.add(pinkLight)
+
+  const cyanLight = new THREE.DirectionalLight(0x00ffcc, 1.8)
+  cyanLight.position.set(5, -5, -2)
+  scene.add(cyanLight)
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5))
+
+  // Model Loading
+  let modelGroup = new THREE.Group()
+  scene.add(modelGroup)
+
+  let model = null
+  const loader = new GLTFLoader()
+
+  loader.load(
+    '/models/model.glb',
+    (gltf) => {
+      model = gltf.scene
+      model.updateMatrixWorld(true)
+
+      const box = new THREE.Box3().setFromObject(model)
+      const center = new THREE.Vector3()
+      box.getCenter(center)
+      const size = new THREE.Vector3()
+      box.getSize(size)
+
+      if (isFinite(center.x) && isFinite(center.y) && isFinite(center.z)) {
+        model.position.sub(center)
+      }
+
+      const maxDim = Math.max(size.x, size.y, size.z)
+      const targetScale = (isFinite(maxDim) && maxDim > 0) ? (2.6 / maxDim) : 1
+      modelGroup.add(model)
+
+      setupScrollAnimation(modelGroup, targetScale)
+    },
+    undefined,
+    (err) => {
+      console.warn('Could not load /models/model.glb, fallback to knot geometry.', err)
+      const geometry = new THREE.TorusKnotGeometry(1.2, 0.38, 200, 32)
+      const material = new THREE.MeshStandardMaterial({
+        color: 0x222222, roughness: 0.15, metalness: 0.9
+      })
+      model = new THREE.Mesh(geometry, material)
+      modelGroup.add(model)
+      setupScrollAnimation(modelGroup, 1.2)
+    }
+  )
+
+  function setupScrollAnimation(group, targetScale) {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return
+
+    gsap.registerPlugin(ScrollTrigger)
+
+    // Hide model initially on Page 1 (Hero section)
+    gsap.set(group.scale, { x: 0, y: 0, z: 0 })
+
+    // Reveal & Scale Up model smoothly when scrolling into Page 2 (#timeline-view)
+    gsap.to(group.scale, {
+      x: targetScale,
+      y: targetScale,
+      z: targetScale,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#timeline-view",
+        start: "top 85%",
+        end: "top 35%",
+        scrub: 1
+      }
+    })
+
+    // Cinematic 4-Stage Camera Sequence (Full Body -> Front Face CloseUp -> Profile -> Back View)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#timeline-view",
+        start: "top 50%",
+        end: "bottom bottom",
+        scrub: 1.2
+      }
+    })
+
+    // Stage 1: Full Body Shot (Shift Left)
+    tl.to(group.position, { x: -0.6, y: -0.1, z: 0.8, ease: "power1.inOut" }, 0)
+    tl.to(group.rotation, { x: 0, y: -0.2, z: 0, ease: "power1.inOut" }, 0)
+
+    // Stage 2: Front Face Close-Up (Dolly in, Shift Right)
+    tl.to(group.position, { x: 0.6, y: -0.2, z: 2.2, ease: "power1.inOut" }, 0.33)
+    tl.to(group.rotation, { x: 0.1, y: 0.1, z: 0, ease: "power1.inOut" }, 0.33)
+
+    // Stage 3: Profile Side View (Shift Left, 90-degree turn)
+    tl.to(group.position, { x: -0.5, y: 0, z: 1.2, ease: "power1.inOut" }, 0.66)
+    tl.to(group.rotation, { x: 0, y: Math.PI / 2, z: 0, ease: "power1.inOut" }, 0.66)
+
+    // Stage 4: Back View (Center, 180-degree turn towards footer)
+    tl.to(group.position, { x: 0, y: 0, z: 0.8, ease: "power1.inOut" }, 1.0)
+    tl.to(group.rotation, { x: 0.1, y: Math.PI, z: 0, ease: "power1.inOut" }, 1.0)
+  }
+
+  // Mouse Parallax Interaction
+  const cursor = { x: 0, y: 0 }
+  window.addEventListener('pointermove', (e) => {
+    cursor.x = (e.clientX / window.innerWidth) - 0.5
+    cursor.y = (e.clientY / window.innerHeight) - 0.5
+  })
+
+  const clock = new THREE.Clock()
+
+  const renderLoop = () => {
+    const elapsedTime = clock.getElapsedTime()
+
+    // Smooth camera mouse follow
+    cameraGroup.position.x += (cursor.x * 0.8 - cameraGroup.position.x) * 0.05
+    cameraGroup.position.y += (-cursor.y * 0.8 - cameraGroup.position.y) * 0.05
+
+    // Slow organic ambient float
+    scene.position.y = Math.sin(elapsedTime * 1.2) * 0.08
+
+    renderer.render(scene, camera)
+    requestAnimationFrame(renderLoop)
+  }
+
+  renderLoop()
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+  })
+}
