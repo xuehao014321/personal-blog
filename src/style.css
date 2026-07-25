@@ -887,6 +887,22 @@ body.page-dark {
   margin: 0 0 2rem 0;
 }
 
+.wheel-title-text {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  width: 100%;
+  white-space: normal;
+  line-height: 1.1;
+}
+
+.wheel-info-wrapper {
+  margin-top: 1rem;
+  width: 100%;
+}
+
 /* --- Vanilla Option Wheel --- */
 .option-wheel {
   position: relative;

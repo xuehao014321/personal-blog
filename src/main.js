@@ -182,25 +182,50 @@ async function loadBlogPosts() {
       const container = document.getElementById(`posts-${year}`)
       if (!container) return
       
-      const itemsHtml = yearPosts.map(renderPostCard)
-      
       // If there are 3 or more articles, render them as a 3D OptionWheel!
-      if (itemsHtml.length >= 3) {
+      if (yearPosts.length >= 3) {
         import('./option-wheel.js').then(module => {
-          container.setAttribute('data-lenis-prevent', 'true'); // Prevents Lenis from intercepting wheel scrolling inside
-          new module.OptionWheel(container, {
-            items: itemsHtml,
-            rowH: 150, // Space between cards
-            curve: 1.2, // Depth
-            tilt: 10,   // Angle spread
-            fade: 0.5,
-            minOpacity: 0.15,
+          container.innerHTML = ''; // Clear container
+
+          // Wrapper for the scrollable wheel
+          const wheelWrapper = document.createElement('div');
+          wheelWrapper.setAttribute('data-lenis-prevent', 'true');
+          
+          // Wrapper for the detailed bento card
+          const infoWrapper = document.createElement('div');
+          infoWrapper.className = 'wheel-info-wrapper';
+
+          container.appendChild(wheelWrapper);
+          container.appendChild(infoWrapper);
+
+          // Get just the concise titles for the wheel
+          const titleItems = yearPosts.map(post => `<div class="wheel-title-text">${post.title}</div>`);
+
+          new module.OptionWheel(wheelWrapper, {
+            items: titleItems,
+            rowH: 80, // Tighter spacing for titles
+            curve: 1.2, 
+            tilt: 12,   
+            fade: 0.65,
+            minOpacity: 0.05,
             inset: 10,
-            side: 'left' // Usually Left, but OptionWheel class adjusts itself
+            side: parseInt(year) === 2024 || parseInt(year) === 2025 ? 'right' : 'left',
+            onChange: (idx) => {
+               // Update info wrapper with the full card when a wheel item is selected
+               infoWrapper.innerHTML = renderPostCard(yearPosts[idx]);
+               // Play a simple fade-in/slide-up animation for the card
+               if (window.gsap) {
+                 window.gsap.fromTo(
+                   infoWrapper.children[0], 
+                   { opacity: 0, y: 15 }, 
+                   { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+                 );
+               }
+            }
           });
         });
       } else {
-        container.innerHTML = itemsHtml.join('')
+        container.innerHTML = yearPosts.map(renderPostCard).join('')
       }
       
       injected = true
