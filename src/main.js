@@ -223,6 +223,12 @@ async function loadBlogPosts() {
                }
             }
           });
+
+          // Render the default article immediately on load to prevent layout shifts
+          infoWrapper.innerHTML = renderPostCard(yearPosts[0]);
+          if (window.gsap && infoWrapper.children[0]) {
+             window.gsap.set(infoWrapper.children[0], { opacity: 1, y: 0 });
+          }
         });
       } else {
         container.innerHTML = yearPosts.map(renderPostCard).join('')
