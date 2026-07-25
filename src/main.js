@@ -673,6 +673,7 @@ window.addEventListener('load', () => {
       // Play on initial load AFTER the segmented reveal finishes (delay ~1000ms)
       setTimeout(playCoinFlip, 1000);
       navWrap.addEventListener('mouseenter', playCoinFlip); // Play on hover
+      navWrap.addEventListener('touchstart', playCoinFlip, { passive: true }); // Play on mobile touch
 
 
       // Segment 1 (Left): slide in from left
