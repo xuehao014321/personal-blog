@@ -887,3 +887,43 @@ body.page-dark {
   margin: 0 0 2rem 0;
 }
 
+/* --- Vanilla Option Wheel --- */
+.option-wheel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+  margin-top: 1rem;
+}
+
+.option-wheel--dragging {
+  cursor: grabbing !important;
+}
+
+.option-wheel__item {
+  position: absolute;
+  top: 50%;
+  left: var(--ow-inset);
+  transform-origin: left center;
+  cursor: pointer;
+  will-change: transform, opacity;
+  width: calc(100% - var(--ow-inset) - 10px);
+}
+
+.option-wheel--right .option-wheel__item {
+  left: auto;
+  right: var(--ow-inset);
+  transform-origin: right center;
+}
+
+/* Ensure the bento item cards inside the wheel look good */
+.option-wheel__item .bento-item {
+  margin-bottom: 0 !important;
+  transform: none !important;
+  opacity: 1 !important; /* overrides gs_reveal initial state */
+  width: 100%;
+  pointer-events: auto; /* Allow clicking links inside */
+}
+

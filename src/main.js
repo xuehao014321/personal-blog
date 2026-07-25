@@ -181,7 +181,28 @@ async function loadBlogPosts() {
     Object.entries(byYear).forEach(([year, yearPosts]) => {
       const container = document.getElementById(`posts-${year}`)
       if (!container) return
-      container.innerHTML = yearPosts.map(renderPostCard).join('')
+      
+      const itemsHtml = yearPosts.map(renderPostCard)
+      
+      // If there are 3 or more articles, render them as a 3D OptionWheel!
+      if (itemsHtml.length >= 3) {
+        import('./option-wheel.js').then(module => {
+          container.setAttribute('data-lenis-prevent', 'true'); // Prevents Lenis from intercepting wheel scrolling inside
+          new module.OptionWheel(container, {
+            items: itemsHtml,
+            rowH: 150, // Space between cards
+            curve: 1.2, // Depth
+            tilt: 10,   // Angle spread
+            fade: 0.5,
+            minOpacity: 0.15,
+            inset: 10,
+            side: 'left' // Usually Left, but OptionWheel class adjusts itself
+          });
+        });
+      } else {
+        container.innerHTML = itemsHtml.join('')
+      }
+      
       injected = true
     })
 
