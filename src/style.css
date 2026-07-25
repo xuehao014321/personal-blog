@@ -812,3 +812,11 @@ body.page-dark {
   from { stroke-dashoffset: 820; }
   to { stroke-dashoffset: 0; }
 }
+
+/* Vertical layout container for project cards within each category */
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+}
