@@ -87,7 +87,9 @@ export function initBubbleMenu(containerSelector, options = {}) {
     if (isMenuOpen) {
       showOverlay = true;
       overlay.style.pointerEvents = 'auto';
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden'; // Disable scrolling when menu is open
+      if (window.lenis) window.lenis.stop();
       toggleBtn.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
       gsap.set(overlay, { display: 'flex' });
@@ -126,7 +128,9 @@ export function initBubbleMenu(containerSelector, options = {}) {
       overlay.style.pointerEvents = 'none';
       document.removeEventListener('click', handleOutsideClick);
       document.removeEventListener('keydown', handleKeyDown);
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = ''; // Re-enable scrolling when menu is closed
+      if (window.lenis) window.lenis.start();
       toggleBtn.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
       gsap.killTweensOf([...bubbles, ...labels]);
