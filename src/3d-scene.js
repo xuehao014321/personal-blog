@@ -87,24 +87,57 @@ export function init3DScene() {
 
     gsap.registerPlugin(ScrollTrigger)
 
-    // Hide model initially on Page 1 (Hero section)
-    gsap.set(group.scale, { x: 0, y: 0, z: 0 })
+    // 1. Initial State: Model is full size, positioned below screen, fully transparent
+    gsap.set(group.scale, { x: targetScale, y: targetScale, z: targetScale })
+    gsap.set(group.position, { x: -0.6, y: -4.0, z: 0.8 })
+    gsap.set(group.rotation, { x: 0, y: -0.2, z: 0 })
 
-    // Reveal & Scale Up model smoothly when scrolling into Page 2 (#timeline-view)
-    gsap.to(group.scale, {
-      x: targetScale,
-      y: targetScale,
-      z: targetScale,
+    group.traverse((child) => {
+      if (child.isMesh && child.material) {
+        const mats = Array.isArray(child.material) ? child.material : [child.material]
+        mats.forEach(mat => {
+          mat.transparent = true
+          mat.opacity = 0
+          mat.needsUpdate = true
+        })
+      }
+    })
+
+    // 2. Entrance Animation: Slide up from bottom + Fade In Opacity (top 95% to top 50%)
+    gsap.to(group.position, {
+      y: -0.1,
       ease: "power2.out",
       scrollTrigger: {
         trigger: "#timeline-view",
-        start: "top 85%",
-        end: "top 35%",
+        start: "top 95%",
+        end: "top 50%",
         scrub: 1
       }
     })
 
-    // Cinematic 4-Stage Camera Sequence (Full Body -> Front Face CloseUp -> Profile -> Back View)
+    const fader = { opacity: 0 }
+    gsap.to(fader, {
+      opacity: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#timeline-view",
+        start: "top 95%",
+        end: "top 50%",
+        scrub: 1
+      },
+      onUpdate: () => {
+        group.traverse((child) => {
+          if (child.isMesh && child.material) {
+            const mats = Array.isArray(child.material) ? child.material : [child.material]
+            mats.forEach(mat => {
+              mat.opacity = fader.opacity
+            })
+          }
+        })
+      }
+    })
+
+    // 3. Cinematic 4-Stage Camera Sequence (Full Body -> Front Face CloseUp -> Profile -> Back View)
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#timeline-view",
