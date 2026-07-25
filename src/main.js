@@ -523,14 +523,116 @@ if (skillBars.length > 0) {
 
 
 
-// ── Splash Screen Animation ──
+// ── Splash Screen & Navbar Logo Animation ──
 window.addEventListener('load', () => {
   const splash = document.getElementById('splash-screen');
-  if (!splash) return;
-  // Wait for glitch to play (2.5s) then fade out
-  setTimeout(() => {
-    splash.style.transition = 'opacity 0.8s ease';
-    splash.style.opacity = '0';
-    setTimeout(() => { splash.style.display = 'none'; }, 800);
-  }, 2200);
+  const splashWrap = document.getElementById('splash-logo-wrap');
+  
+  const easeHard = 'cubic-bezier(0.22,1,0.36,1)';
+  const easeOut = 'cubic-bezier(0.16,1,0.3,1)';
+  const easeNarr = 'cubic-bezier(0.34,0,0.14,1)';
+  const easeBack = 'cubic-bezier(0.34,1.56,0.64,1)';
+
+  // --- Splash Screen: Elastic Bounce + Press & Pop ---
+  if (splash && splashWrap) {
+    // 1. Elastic Bounce (starts immediately)
+    splashWrap.animate([
+      { transform: 'translateX(-80px) scaleX(1.3) scaleY(0.7)', easing: easeOut },
+      { transform: 'translateX(12px) scaleX(0.85) scaleY(1.15)', offset: .5, easing: easeHard },
+      { transform: 'translateX(-6px) scaleX(1.08) scaleY(0.94)', offset: .68 },
+      { transform: 'translateX(3px) scaleX(0.97) scaleY(1.03)', offset: .82 },
+      { transform: 'translateX(0) scaleX(1) scaleY(1)' }
+    ], { duration: 900, fill: 'forwards' });
+
+    // 2. Press & Pop (starts after Bounce finishes)
+    setTimeout(() => {
+      splashWrap.animate([
+        { transform: 'scaleX(1) scaleY(1)', easing: easeNarr },
+        { transform: 'scaleX(1.35) scaleY(0.65)', offset: .2, easing: easeBack },
+        { transform: 'scaleX(0.88) scaleY(1.18)', offset: .45 },
+        { transform: 'scaleX(1.06) scaleY(0.95)', offset: .65 },
+        { transform: 'scaleX(0.98) scaleY(1.02)', offset: .8 },
+        { transform: 'scaleX(1) scaleY(1)' }
+      ], { duration: 700, fill: 'forwards' });
+    }, 1000);
+
+    // Fade out splash screen completely
+    setTimeout(() => {
+      splash.style.transition = 'opacity 0.8s ease';
+      splash.style.opacity = '0';
+      setTimeout(() => { splash.style.display = 'none'; }, 800);
+    }, 1900);
+  }
+
+  // --- Navbar Logo: Segmented Reveal + 3D Coin Flip (Pure WAAPI) ---
+  const navWrap = document.getElementById('nav-logo-wrap');
+  const seg_l = document.getElementById('nav_seg_l');
+  const seg_r = document.getElementById('nav_seg_r');
+  const seg_c = document.getElementById('nav_seg_c');
+
+  if (navWrap && seg_l && seg_r && seg_c) {
+    // 1. Initially hide the navbar logo container
+    navWrap.style.opacity = '0';
+
+    // 2. If splash screen exists, wait for it (1800ms). Otherwise, reveal immediately (100ms).
+    const entranceDelay = splash ? 1800 : 100;
+
+    setTimeout(() => {
+      navWrap.style.opacity = '1';
+
+      // 3D Coin Flip on wrapper
+      const playCoinFlip = () => {
+        navWrap.getAnimations().forEach(a => a.cancel());
+        navWrap.animate([
+          { opacity: 0, transform: 'perspective(600px) rotateY(-180deg) scale(0.5)' },
+          { opacity: 1, transform: 'perspective(600px) rotateY(10deg) scale(1.05)', offset: 0.65 },
+          { opacity: 1, transform: 'perspective(600px) rotateY(-5deg) scale(0.98)', offset: 0.82 },
+          { opacity: 1, transform: 'perspective(600px) rotateY(2deg) scale(1.01)', offset: 0.92 },
+          { opacity: 1, transform: 'perspective(600px) rotateY(0deg) scale(1)' }
+        ], {
+          duration: 1000,
+          easing: easeOut,
+          fill: 'forwards'
+        });
+      };
+      
+      // Play on initial load AFTER the segmented reveal finishes (delay ~1000ms)
+      setTimeout(playCoinFlip, 1000);
+      navWrap.addEventListener('mouseenter', playCoinFlip); // Play on hover
+
+
+      // Segment 1 (Left): slide in from left
+      seg_l.animate([
+        { opacity: 0, transform: 'translateX(-40px)' },
+        { opacity: 1, transform: 'translateX(0)' }
+      ], {
+        duration: 700,
+        delay: 80,
+        easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        fill: 'forwards'
+      });
+
+      // Segment 2 (Right): slide in from right
+      seg_r.animate([
+        { opacity: 0, transform: 'translateX(40px)' },
+        { opacity: 1, transform: 'translateX(0)' }
+      ], {
+        duration: 700,
+        delay: 220,
+        easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        fill: 'forwards'
+      });
+
+      // Segment 3 (Center): drop down from top
+      seg_c.animate([
+        { opacity: 0, transform: 'translateY(-40px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ], {
+        duration: 600,
+        delay: 380,
+        easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        fill: 'forwards'
+      });
+    }, entranceDelay);
+  }
 });

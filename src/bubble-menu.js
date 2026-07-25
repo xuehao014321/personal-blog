@@ -67,11 +67,26 @@ export function initBubbleMenu(containerSelector, options = {}) {
     }
   }
 
+  function handleOutsideClick(e) {
+    if (!isMenuOpen) return;
+    if (toggleBtn && toggleBtn.contains(e.target)) return;
+    if (e.target.closest('.pill-link')) return;
+
+    handleToggle();
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === 'Escape' && isMenuOpen) {
+      handleToggle();
+    }
+  }
+
   function handleToggle() {
     isMenuOpen = !isMenuOpen;
     
     if (isMenuOpen) {
       showOverlay = true;
+      overlay.style.pointerEvents = 'auto';
       document.body.style.overflow = 'hidden'; // Disable scrolling when menu is open
       toggleBtn.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
@@ -100,7 +115,17 @@ export function initBubbleMenu(containerSelector, options = {}) {
           }, `-=${animationDuration * 0.9}`);
         }
       });
+
+      setTimeout(() => {
+        if (isMenuOpen) {
+          document.addEventListener('click', handleOutsideClick);
+          document.addEventListener('keydown', handleKeyDown);
+        }
+      }, 0);
     } else {
+      overlay.style.pointerEvents = 'none';
+      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = ''; // Re-enable scrolling when menu is closed
       toggleBtn.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
@@ -132,6 +157,8 @@ export function initBubbleMenu(containerSelector, options = {}) {
     destroy: () => {
       toggleBtn.removeEventListener('click', handleToggle);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
       container.innerHTML = '';
       document.body.style.overflow = '';
     }

@@ -26,39 +26,25 @@
     <div class="noise"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
-  <div id="splash-screen" style="position: fixed; inset: 0; background: #050506; z-index: 9999999; display: flex; justify-content: center; align-items: center; pointer-events: none;">
-    <img src="/Navbar Logo.svg" style="width: clamp(120px, 20vw, 300px); height: auto; filter: brightness(0) invert(1);" alt="Splash Logo" class="splash-glitch" />
-  </div>
+    <!-- Custom Top-Left Logo -->
+  <a href="/" class="navbar-logo-link" style="mix-blend-mode: difference; color: #ffffff; z-index: 1000;">
+    <div id="nav-logo-wrap" style="opacity:0; width:48px;height:48px;display:flex;align-items:center;justify-content:center;transform-origin:center; cursor: pointer;">
+      <svg class="navbar-logo-svg" viewBox="0 0 150 150" width="100%" height="100%" style="overflow:visible;color:inherit;">
+        <defs>
+          <clipPath id="nav_cp_left">  <rect x="0"  y="-10" width="55"  height="170"/></clipPath>
+          <clipPath id="nav_cp_right"> <rect x="95" y="-10" width="55"  height="170"/></clipPath>
+          <clipPath id="nav_cp_center"><rect x="55" y="-10" width="40"  height="170"/></clipPath>
+        </defs>
+        <path id="nav_seg_l" class="nav-draw-path" clip-path="url(#nav_cp_left)" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z"/>
+        <path id="nav_seg_r" class="nav-draw-path" clip-path="url(#nav_cp_right)" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z"/>
+        <path id="nav_seg_c" class="nav-draw-path" clip-path="url(#nav_cp_center)" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z"/>
+      </svg>
+    </div>
+  </a>
 
-    <header class="header">
-      <a href="/" class="navbar-logo-link">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="navbar-logo-svg">
-          <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="miter" stroke-linecap="butt">
-            <path d="M 10 10 L 40 30 L 40 70 L 10 90 L 10 70 L 40 50 L 10 30 Z" />
-            <path d="M 90 10 L 60 30 L 60 70 L 90 90 L 90 70 L 60 50 L 90 30 Z" />
-            <line x1="40" y1="35" x2="60" y2="35" />
-            <polyline points="40,50 50,60 60,50" />
-          </g>
-        </svg>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="/projects.html" class="magnetic-link active-nav">Projects</a></li>
-          <li><a href="/#timeline-view" class="magnetic-link">Blog</a></li>
-          <li><a href="/about.html" class="magnetic-link">About</a></li>
-        </ul>
-      </nav>
-    </header>
+  <div id="bubble-menu-container"></div>
 
-    <main>
-      <div class="page-hero dark-theme">
-        <div class="page-hero-inner">
-          <p class="page-eyebrow">Hardware · Software · Systems</p>
-          <h1 class="page-title">Projects</h1>
-          <p class="page-subtitle">Real systems I've designed, wired, coded and debugged — from sensor fusion prototypes on Raspberry Pi to AI agent deployments on Vercel. Built as a final-year CS student at UTAR.</p>
-        </div>
-      </div>
-
+  <main>
       <section class="projects-container dark-theme">
 
         <aside class="sticky-sidebar">
@@ -86,44 +72,7 @@
               <span class="section-badge">HW</span>
               <h2>Hardware & Embedded</h2>
             </div>
-
-            <div class="bento-item gs_reveal project-card">
-              <div class="project-number">01 · Featured Project</div>
-              <span class="tag">Raspberry Pi &middot; Python &middot; AS7343 &middot; VL53L0X &middot; LJC18A3 &middot; Servo</span>
-              <div>
-                <h3>EcoSortNet — Multi-Modal Sensor Fusion Waste Sorting System</h3>
-                <p>My MSc capstone project (supervised by Mr. Goh Hock Guan). A hierarchical waste classification prototype that fuses spectral data, laser ranging and inductive proximity sensing to autonomously sort waste into four categories on a conveyor belt.</p>
-                <p style="margin-top: 0.75rem;">I designed the full hardware circuit topology independently — MG996R and SG90 servo control, camera pipeline, AI classification integration, conveyor mechanics, anti-jam deflector and funnel system — and wrote all Python control logic from scratch.</p>
-                <div class="project-highlights">
-                  <span class="highlight">AS7343 Spectral</span>
-                  <span class="highlight">VL53L0X Ranging</span>
-                  <span class="highlight">LJC18A3 Proximity</span>
-                  <span class="highlight">4-bin Sorting</span>
-                  <span class="highlight">Live AI Classification</span>
-                </div>
-              </div>
-              <div class="card-links">
-                <a href="https://github.com/xuehao014321" class="card-link" target="_blank">GitHub ↗</a>
-                <a href="#" class="card-link card-link--primary">Technical Report ↗</a>
-              </div>
-            </div>
-
-            <div class="bento-item gs_reveal project-card">
-              <div class="project-number">02</div>
-              <span class="tag">Raspberry Pi &middot; I2C &middot; OpenCV &middot; Python</span>
-              <div>
-                <h3>Raspberry Pi Sensor Debug Toolkit</h3>
-                <p>A personal collection of tested Python drivers, I2C diagnostic scripts and wiring reference sheets for the sensors I've worked with: AS7343 (spectral), VL53L0X (ToF ranging), LJC18A3 (inductive proximity) and common servo controllers. Saves hours every time I start a new hardware project.</p>
-                <div class="project-highlights">
-                  <span class="highlight">Open Source</span>
-                  <span class="highlight">Driver Library</span>
-                  <span class="highlight">I2C Diagnostic</span>
-                </div>
-              </div>
-              <div class="card-links">
-                <a href="https://github.com/xuehao014321" class="card-link card-link--primary" target="_blank">GitHub ↗</a>
-              </div>
-            </div>
+            <div class="projects-container" id="projects-HW"></div>
           </article>
 
           <!-- Full-Stack -->

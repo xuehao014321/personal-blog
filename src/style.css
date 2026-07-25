@@ -788,3 +788,27 @@ body.page-dark {
   50%       { transform: perspective(400px) rotateY(0deg) rotateX(8deg) translateY(-2px); }
   75%       { transform: perspective(400px) rotateY(-15deg) rotateX(5deg) translateY(2px); }
 }
+
+/* Navbar Logo Hand-drawn animation */
+.navbar-logo-svg .nav-draw-path {
+  fill: currentColor;
+  stroke: none;
+  stroke-width: 2px;
+  stroke-dasharray: 820;
+  stroke-dashoffset: 0;
+  transition: fill 0.4s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.navbar-logo-link:hover .navbar-logo-svg .nav-draw-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-dashoffset: 820;
+  animation: strokeDraw 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes strokeDraw {
+  from { stroke-dashoffset: 820; }
+  to { stroke-dashoffset: 0; }
+}

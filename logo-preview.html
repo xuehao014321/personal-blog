@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logo Animation Preview — All Methods</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0b;
+      color: #f0f0f0;
+      padding: 3rem 2rem 8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5rem;
+    }
+
+    h1 {
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #444;
+      text-align: center;
+    }
+
+    /* ── Section ── */
+    .section {
+      width: 100%;
+      max-width: 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #333;
+      border-bottom: 1px solid #1a1a1c;
+      width: 100%;
+      padding-bottom: .8rem;
+      text-align: left;
+    }
+
+    .section-title span {
+      color: #666;
+    }
+
+    /* ── Stage ── */
+    .stage {
+      width: 260px;
+      height: 260px;
+      background: #0d0d0f;
+      border: 1px solid #1e1e20;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .stage.light {
+      background: #f5f5f3;
+    }
+
+    .stage canvas {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* ── Chips & Buttons ── */
+    .row {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .chip {
+      padding: .35rem .9rem;
+      background: transparent;
+      border: 1px solid #222;
+      border-radius: 999px;
+      color: #555;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .chip:hover {
+      border-color: #555;
+      color: #aaa;
+    }
+
+    .chip.on {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .replay-btn {
+      padding: .6rem 1.4rem;
+      background: #1a1a1c;
+      border: 1px solid #2a2a2e;
+      border-radius: 999px;
+      color: #aaa;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .replay-btn:hover {
+      background: #222;
+      color: #fff;
+      border-color: #444;
+    }
+
+    /* ── BIG GRID (pixel2motion presets) ── */
+    .big-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .6rem;
+      width: 100%;
+    }
+
+    .pgrid-btn {
+      padding: .7rem .3rem;
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      color: #555;
+      font-size: .58rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+      line-height: 1.5;
+    }
+
+    .pgrid-btn:hover {
+      background: #1a1a1c;
+      color: #ccc;
+      border-color: #333;
+    }
+
+    .pgrid-btn.on {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .pgrid-btn .ico {
+      font-size: .85rem;
+      display: block;
+      margin-bottom: .1rem;
+    }
+
+    /* ── Method cards ── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .method-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background: #0d0d0f;
+      border: 1px solid #1a1a1c;
+      border-radius: 18px;
+      padding: 1.5rem;
+    }
+
+    .method-title {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #444;
+    }
+
+    .method-desc {
+      font-size: .62rem;
+      color: #333;
+      text-align: center;
+      line-height: 1.6;
+      max-width: 180px;
+    }
+
+    .mini-stage {
+      width: 160px;
+      height: 160px;
+      background: #0d0d0f;
+      border: 1px solid #1e1e20;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mini-stage.light-bg {
+      background: #f5f5f3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Logo Animation Preview · All Methods</h1>
+
+  <!-- ════════════════════════════════════════
+     SECTION 1 — Pixel2Motion Presets
+════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">① Pixel2Motion 预设 <span>— 点击舞台或按钮重播</span></div>
+
+    <div class="stage" id="s1" onclick="p2m_replay()">
+      <div id="p2m-wrap"
+        style="width:140px;height:140px;display:flex;align-items:center;justify-content:center;transform-origin:center;">
+        <svg id="p2m-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"
+          style="width:100%;height:100%;overflow:visible;color:#ffffff;">
+          <path fill="currentColor"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="big-grid">
+      <button class="pgrid-btn on" onclick="p2m_set('horizon',this)"><span class="ico">🌅</span>Horizon Rise</button>
+      <button class="pgrid-btn" onclick="p2m_set('drop',this)"><span class="ico">🎯</span>Drop & Settle</button>
+      <button class="pgrid-btn" onclick="p2m_set('expand',this)"><span class="ico">✨</span>Expand Reveal</button>
+      <button class="pgrid-btn" onclick="p2m_set('swing',this)"><span class="ico">🕰</span>Arc Swing</button>
+      <button class="pgrid-btn" onclick="p2m_set('bounce',this)"><span class="ico">⚡</span>Elastic Bounce</button>
+      <button class="pgrid-btn" onclick="p2m_set('glitch',this)"><span class="ico">📡</span>Cyber Glitch</button>
+      <button class="pgrid-btn" onclick="p2m_set('float',this)"><span class="ico">🌊</span>Gentle Float</button>
+      <button class="pgrid-btn" onclick="p2m_set('press',this)"><span class="ico">👇</span>Press & Pop</button>
+      <button class="pgrid-btn" onclick="p2m_set('spin3d',this)"><span class="ico">🛸</span>3D Coin Flip</button>
+      <button class="pgrid-btn" onclick="p2m_set('wobble',this)"><span class="ico">🍮</span>Jello Wobble</button>
+      <button class="pgrid-btn" onclick="p2m_set('neon',this)"><span class="ico">💠</span>Neon Pulse</button>
+      <button class="pgrid-btn" onclick="p2m_set('static',this)"><span class="ico">⏸</span>Static</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+     SECTION 2 — Method 1: SVG Stroke Draw
+════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">② 方案一：SVG 手写描边 <span>stroke-dashoffset ⭐⭐⭐⭐⭐</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <div class="stage" id="s_stroke" onclick="m1_play()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"
+          style="width:160px;height:160px;overflow:visible;">
+          <path id="m1_path" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+        </svg>
+      </div>
+      <div class="row">
+        <span
+          style="font-size:.6rem;color:#444;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;">线粗：</span>
+        <button class="chip" onclick="m1_width(1,this)">1px</button>
+        <button class="chip on" onclick="m1_width(2.5,this)">2.5px</button>
+        <button class="chip" onclick="m1_width(4,this)">4px</button>
+        <button class="chip" onclick="m1_width(6,this)">6px</button>
+      </div>
+      <div class="row">
+        <span
+          style="font-size:.6rem;color:#444;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;">速度：</span>
+        <button class="chip" onclick="m1_dur(1,this)">1s快</button>
+        <button class="chip on" onclick="m1_dur(2.5,this)">2.5s</button>
+        <button class="chip" onclick="m1_dur(4,this)">4s慢</button>
+      </div>
+      <button class="replay-btn" onclick="m1_play()">▶ 重播</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+     SECTION 3 — Method 2: Clip-path Sweep
+════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">③ 方案二：Clip-path 扫描揭露 <span>⭐⭐⭐⭐</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <div class="stage" id="s_clip" onclick="m2_play()">
+        <svg id="m2_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" style="width:160px;height:160px;">
+          <defs>
+            <clipPath id="sweepClip">
+              <rect id="sweepRect" x="-160" y="-10" width="0" height="170" />
+            </clipPath>
+          </defs>
+          <path fill="#ffffff" clip-path="url(#sweepClip)"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+        </svg>
+      </div>
+      <div class="row">
+        <button class="chip on" onclick="m2_dir('lr',this)">← 左到右</button>
+        <button class="chip" onclick="m2_dir('tb',this)">↓ 上到下</button>
+        <button class="chip" onclick="m2_dir('bt',this)">↑ 下到上</button>
+      </div>
+      <button class="replay-btn" onclick="m2_play()">▶ 重播</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+     SECTION 4 — Method 3: Canvas Particle
+════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">④ 方案三：发光笔迹追踪 <span>⭐⭐⭐⭐</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <div class="stage" id="s_particle" style="overflow:visible;" onclick="m3_play()">
+        <canvas id="m3_canvas" width="260" height="260"
+          style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+        <svg id="m3_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"
+          style="width:160px;height:160px;position:relative;z-index:2;opacity:0;transition:opacity .4s;">
+          <path fill="#ffffff"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+        </svg>
+      </div>
+      <div class="row">
+        <span
+          style="font-size:.6rem;color:#444;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;">颜色：</span>
+        <button class="chip on" onclick="m3_color('cyan',this)">💠 青色</button>
+        <button class="chip" onclick="m3_color('white',this)">⚪ 白色</button>
+        <button class="chip" onclick="m3_color('gold',this)">🟡 金色</button>
+      </div>
+      <button class="replay-btn" onclick="m3_play()">▶ 重播</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+     SECTION 5 — Method 4: Ink Spread
+════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">⑤ 方案四：墨水扩散浮现 <span>⭐⭐⭐</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <div class="stage" id="s_ink" onclick="m4_play()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" style="width:160px;height:160px;">
+          <defs>
+            <radialGradient id="inkMask" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="white" stop-opacity="1" />
+              <stop id="inkStop" offset="0%" stop-color="white" stop-opacity="0" />
+            </radialGradient>
+            <mask id="inkClip">
+              <rect width="150" height="150" fill="url(#inkMask)" />
+            </mask>
+          </defs>
+          <path id="m4_path" fill="#ffffff" mask="url(#inkClip)"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+        </svg>
+      </div>
+      <button class="replay-btn" onclick="m4_play()">▶ 重播</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+     SECTION 6 — Method 5: Segmented Reveal
+════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">⑥ 方案五：分段错位出场 <span>⭐⭐⭐</span></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+      <div class="stage" id="s_seg" onclick="m5_play()">
+        <svg id="m5_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"
+          style="width:160px;height:160px;overflow:visible;">
+          <defs>
+            <clipPath id="cp_left">
+              <rect id="cl_l" x="0" y="0" width="55" height="150" />
+            </clipPath>
+            <clipPath id="cp_right">
+              <rect id="cl_r" x="95" y="0" width="55" height="150" />
+            </clipPath>
+            <clipPath id="cp_center">
+              <rect id="cl_c" x="55" y="0" width="40" height="150" />
+            </clipPath>
+          </defs>
+          <!-- Left wing -->
+          <path id="seg_l" clip-path="url(#cp_left)" fill="#ffffff"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+          <!-- Right wing -->
+          <path id="seg_r" clip-path="url(#cp_right)" fill="#ffffff"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+          <!-- Center bar -->
+          <path id="seg_c" clip-path="url(#cp_center)" fill="#ffffff"
+            d="m141.6 109.1-24.3-20.8v-29.3l24.9-21.3c0.3-0.4 0.1-0.4 0.1-2.1v-31.6c0-1.5-1.6-2-2.6-1.1l-50.9 39.9c-0.4 0.4-0.6 0.8-0.6 1.2v8.8h-25.9v-9.4c0-0.5-0.3-0.9-0.6-1.1l-51.4-39.5c-1-0.8-2.7-0.1-2.7 1.2v31.9c0 0.5 0.2 1 0.6 1.3l24.7 21.1v29.8l-24.8 21.1c-0.4 0.3-0.5 0.7-0.5 1.2v35.6c0 1.5 1.9 2.2 2.9 1.3l51.2-43.6c0.4-0.3 0.6-0.8 0.6-1.2v-19.5l13.1 10.6 12.8-10.4v19.1c0 0.5 0.2 1 0.6 1.3l50.5 43.6c1 1 3.1 0.4 3.1-1.1v-35.7c0-0.5-0.4-1-0.8-1.3zm-50.2-64.5 47.6-36.9v28.4l-47.6 40.4v-31.9zm-80.7-37.3 48.4 36.8v32l-48.4-41.1v-27.7zm25.5 53.8 14.9 12.5-15 11.9 0.1-24.4zm22.9 40.3-48.4 41.2v-31.5l43-35.3 5.4 4.4v21.2zm16.2-11.8-13-10.8v-22.6h25.9v22.9l-12.9 10.5zm16.1-9 5.7-4.7 41.9 35.2v31.4l-47.6-41.2v-20.7zm22.9 5-14.7-11.7 14.7-12.3v24z" />
+        </svg>
+      </div>
+      <button class="replay-btn" onclick="m5_play()">▶ 重播</button>
+    </div>
+  </div>
+
+  <!-- ════ SCRIPTS ════ -->
+  <script>
+    // ══════════════════════════════════════════════
+    // SECTION 1 — Pixel2Motion presets (Web Animations)
+    // ══════════════════════════════════════════════
+    const p2m_wrap = document.getElementById('p2m-wrap');
+    let p2m_current = 'horizon';
+    const easeOut = 'cubic-bezier(0.16,1,0.3,1)', easeBack = 'cubic-bezier(0.34,1.56,0.64,1)',
+      easeHard = 'cubic-bezier(0.22,1,0.36,1)', easeNarr = 'cubic-bezier(0.34,0,0.14,1)';
+    const p2m_presets = {
+      horizon: () => { p2m_wrap.animate([{ opacity: 0, transform: 'translateY(60px) scaleY(1.8)', easing: easeOut }, { opacity: 1, transform: 'translateY(-6px) scaleY(0.94)', offset: .65, easing: easeHard }, { opacity: 1, transform: 'translateY(2px) scaleY(1.02)', offset: .82 }, { opacity: 1, transform: 'translateY(0) scaleY(1)' }], { duration: 1200, fill: 'forwards' }); },
+      drop: () => { p2m_wrap.animate([{ opacity: 0, transform: 'translateY(-120px) scaleY(0.6)', easing: easeNarr }, { opacity: 1, transform: 'translateY(0px) scaleX(1.2) scaleY(0.75)', offset: .55, easing: easeHard }, { transform: 'translateY(-18px) scaleX(0.9) scaleY(1.1)', offset: .72, easing: easeHard }, { transform: 'translateY(0) scaleX(1.05) scaleY(0.96)', offset: .86 }, { transform: 'translateY(0) scaleX(1) scaleY(1)' }], { duration: 900, fill: 'forwards' }); },
+      expand: () => { p2m_wrap.animate([{ opacity: 0, transform: 'scale(0.05)', easing: easeBack }, { opacity: 1, transform: 'scale(1.12)', offset: .6, easing: easeHard }, { transform: 'scale(0.97)', offset: .78 }, { transform: 'scale(1.02)', offset: .9 }, { transform: 'scale(1)' }], { duration: 800, fill: 'forwards' }); },
+      swing: () => { p2m_wrap.style.transformOrigin = 'center top'; p2m_wrap.animate([{ transform: 'rotate(12deg)', easing: easeNarr }, { transform: 'rotate(-28deg)', offset: .18, easing: 'cubic-bezier(0.4,0,0.2,1)' }, { transform: 'rotate(14deg)', offset: .42, easing: 'cubic-bezier(0.4,0,0.2,1)' }, { transform: 'rotate(-7deg)', offset: .62, easing: 'cubic-bezier(0.4,0,0.2,1)' }, { transform: 'rotate(3deg)', offset: .78 }, { transform: 'rotate(-1deg)', offset: .9 }, { transform: 'rotate(0deg)' }], { duration: 1400, fill: 'forwards' }); },
+      bounce: () => { p2m_wrap.animate([{ opacity: 0, transform: 'translateX(-80px) scaleX(1.3) scaleY(0.7)', easing: easeOut }, { opacity: 1, transform: 'translateX(12px) scaleX(0.85) scaleY(1.15)', offset: .5, easing: easeHard }, { transform: 'translateX(-6px) scaleX(1.08) scaleY(0.94)', offset: .68 }, { transform: 'translateX(3px) scaleX(0.97) scaleY(1.03)', offset: .82 }, { transform: 'translateX(0) scaleX(1) scaleY(1)' }], { duration: 900, fill: 'forwards' }); },
+      glitch: () => { p2m_wrap.animate([{ transform: 'translate(0) skewX(0)', filter: 'none' }, { transform: 'translate(-6px,2px) skewX(8deg)', filter: 'drop-shadow(-5px 0 0 rgba(255,0,60,.9)) drop-shadow(5px 0 0 rgba(0,243,255,.9))', offset: .06 }, { transform: 'translate(6px,-2px) skewX(-8deg)', filter: 'drop-shadow(5px 0 0 rgba(255,0,60,.9)) drop-shadow(-5px 0 0 rgba(0,243,255,.9))', offset: .12 }, { transform: 'translate(-3px,-3px) skewX(12deg)', filter: 'drop-shadow(-4px 0 0 rgba(255,0,60,.8)) drop-shadow(4px 0 0 rgba(0,243,255,.8))', offset: .18 }, { transform: 'translate(0)', filter: 'drop-shadow(0 0 16px rgba(255,255,255,.9))', offset: .24 }, { transform: 'translate(0)', filter: 'none' }], { duration: 2400, iterations: Infinity }); },
+      float: () => { p2m_wrap.animate([{ transform: 'translateY(0) rotate(0deg)' }, { transform: 'translateY(-14px) rotate(1.5deg)', easing: 'cubic-bezier(0.4,0,0.6,1)', offset: .5 }, { transform: 'translateY(0) rotate(0deg)' }], { duration: 3200, iterations: Infinity }); },
+      press: () => { p2m_wrap.animate([{ transform: 'scaleX(1) scaleY(1)', easing: easeNarr }, { transform: 'scaleX(1.35) scaleY(0.65)', offset: .2, easing: easeBack }, { transform: 'scaleX(0.88) scaleY(1.18)', offset: .45 }, { transform: 'scaleX(1.06) scaleY(0.95)', offset: .65 }, { transform: 'scaleX(0.98) scaleY(1.02)', offset: .8 }, { transform: 'scaleX(1) scaleY(1)' }], { duration: 700, fill: 'forwards' }); },
+      spin3d: () => { p2m_wrap.animate([{ opacity: 0, transform: 'perspective(600px) rotateY(-180deg) scale(0.5)', easing: easeOut }, { opacity: 1, transform: 'perspective(600px) rotateY(10deg) scale(1.05)', offset: .65, easing: easeHard }, { transform: 'perspective(600px) rotateY(-5deg) scale(0.98)', offset: .82 }, { transform: 'perspective(600px) rotateY(2deg) scale(1.01)', offset: .92 }, { transform: 'perspective(600px) rotateY(0deg) scale(1)' }], { duration: 1000, fill: 'forwards' }); },
+      wobble: () => { p2m_wrap.animate([{ transform: 'skewX(0)' }, { transform: 'skewX(-18deg)', offset: .12, easing: easeHard }, { transform: 'skewX(14deg)', offset: .28 }, { transform: 'skewX(-9deg)', offset: .44 }, { transform: 'skewX(6deg)', offset: .58 }, { transform: 'skewX(-3deg)', offset: .72 }, { transform: 'skewX(1.5deg)', offset: .84 }, { transform: 'skewX(0)' }], { duration: 900, fill: 'forwards' }); },
+      neon: () => { p2m_wrap.animate([{ filter: 'drop-shadow(0 0 4px rgba(0,243,255,.2))', transform: 'scale(1)' }, { filter: 'drop-shadow(0 0 28px rgba(0,243,255,1)) drop-shadow(0 0 56px rgba(0,243,255,.4))', transform: 'scale(1.06)', easing: 'cubic-bezier(0.4,0,0.6,1)', offset: .5 }, { filter: 'drop-shadow(0 0 4px rgba(0,243,255,.2))', transform: 'scale(1)' }], { duration: 2000, iterations: Infinity }); },
+      static: () => { }
+    };
+    function p2m_set(name, btn) {
+      p2m_current = name;
+      document.querySelectorAll('.pgrid-btn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      p2m_replay();
+    }
+    function p2m_replay() {
+      p2m_wrap.getAnimations().forEach(a => a.cancel());
+      p2m_wrap.style.cssText = 'width:140px;height:140px;display:flex;align-items:center;justify-content:center;transform-origin:center;';
+      void p2m_wrap.offsetWidth;
+      p2m_presets[p2m_current]?.();
+    }
+    p2m_replay();
+
+    // ══════════════════════════════════════════════
+    // METHOD 1 — stroke-dashoffset draw
+    // ══════════════════════════════════════════════
+    const m1p = document.getElementById('m1_path');
+    let m1_durVal = 2.5, m1_widthVal = 2.5;
+    function m1_width(w, btn) { m1_widthVal = w; m1p.setAttribute('stroke-width', w); document.querySelectorAll('[onclick^="m1_width"]').forEach(b => b.classList.remove('on')); btn.classList.add('on'); }
+    function m1_dur(d, btn) { m1_durVal = d; document.querySelectorAll('[onclick^="m1_dur"]').forEach(b => b.classList.remove('on')); btn.classList.add('on'); m1_play(); }
+    function m1_play() {
+      const len = m1p.getTotalLength();
+      m1p.style.strokeDasharray = len;
+      m1p.style.strokeDashoffset = len;
+      m1p.style.transition = 'none';
+      void m1p.offsetWidth;
+      m1p.style.transition = `stroke-dashoffset ${m1_durVal}s cubic-bezier(0.4,0,0.2,1)`;
+      m1p.style.strokeDashoffset = 0;
+    }
+    setTimeout(m1_play, 600);
+
+    // ══════════════════════════════════════════════
+    // METHOD 2 — clip-path sweep
+    // ══════════════════════════════════════════════
+    const sweepRect = document.getElementById('sweepRect');
+    let m2_direction = 'lr';
+    function m2_dir(d, btn) { m2_direction = d; document.querySelectorAll('[onclick^="m2_dir"]').forEach(b => b.classList.remove('on')); btn.classList.add('on'); m2_play(); }
+    function m2_play() {
+      const r = sweepRect;
+      if (m2_direction === 'lr') {
+        r.setAttribute('x', '-5'); r.setAttribute('y', '-5'); r.setAttribute('width', '0'); r.setAttribute('height', '160');
+        r.style.transition = 'none'; void r.offsetWidth;
+        r.style.transition = 'width 1.8s cubic-bezier(0.4,0,0.2,1)';
+        r.setAttribute('width', '160');
+      } else if (m2_direction === 'tb') {
+        r.setAttribute('x', '-5'); r.setAttribute('y', '-5'); r.setAttribute('width', '160'); r.setAttribute('height', '0');
+        r.style.transition = 'none'; void r.offsetWidth;
+        r.style.transition = 'height 1.8s cubic-bezier(0.4,0,0.2,1)';
+        r.setAttribute('height', '160');
+      } else {
+        r.setAttribute('x', '-5'); r.setAttribute('y', '160'); r.setAttribute('width', '160'); r.setAttribute('height', '0');
+        r.style.transition = 'none'; void r.offsetWidth;
+        r.style.transition = 'y 1.8s cubic-bezier(0.4,0,0.2,1), height 1.8s cubic-bezier(0.4,0,0.2,1)';
+        r.setAttribute('y', '-5'); r.setAttribute('height', '165');
+      }
+    }
+    setTimeout(m2_play, 800);
+
+    // ══════════════════════════════════════════════
+    // METHOD 3 — Canvas particle tracer
+    // ══════════════════════════════════════════════
+    const m3canvas = document.getElementById('m3_canvas');
+    const m3ctx = m3canvas.getContext('2d');
+    const m3svg_el = document.getElementById('m3_svg');
+    // Get path for sampling
+    const m3_pathEl = m3svg_el.querySelector('path');
+    let m3_glowColor = 'rgba(0,243,255,1)';
+    let m3_rafId = null;
+
+    function m3_color(c, btn) {
+      const map = { cyan: 'rgba(0,243,255,1)', white: 'rgba(255,255,255,1)', gold: 'rgba(255,210,0,1)' };
+      m3_glowColor = map[c];
+      document.querySelectorAll('[onclick^="m3_color"]').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      m3_play();
+    }
+
+    function m3_play() {
+      cancelAnimationFrame(m3_rafId);
+      m3svg_el.style.opacity = '0';
+      m3ctx.clearRect(0, 0, 260, 260);
+
+      // Scale: SVG viewBox 0-150 → canvas 260px; offset to center
+      const scale = 260 / 150;
+      const total = m3_pathEl.getTotalLength();
+      const steps = 300;
+      const trail = [];
+      let i = 0;
+
+      function tick() {
+        const t = i / steps;
+        const len = total * t;
+        const pt = m3_pathEl.getPointAtLength(len);
+        const cx = pt.x * scale, cy = pt.y * scale;
+        trail.push({ x: cx, y: cy, a: 1 });
+
+        // fade old trail
+        m3ctx.clearRect(0, 0, 260, 260);
+        trail.forEach((p, idx) => {
+          const alpha = (idx / trail.length) * 0.7;
+          const r = m3_glowColor.replace('1)', alpha + ')');
+          m3ctx.beginPath();
+          m3ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+          m3ctx.fillStyle = r;
+          m3ctx.fill();
+        });
+        // glowing head
+        const grd = m3ctx.createRadialGradient(cx, cy, 0, cx, cy, 18);
+        grd.addColorStop(0, m3_glowColor.replace('1)', '0.9)'));
+        grd.addColorStop(1, m3_glowColor.replace('1)', '0)'));
+        m3ctx.beginPath(); m3ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+        m3ctx.fillStyle = grd; m3ctx.fill();
+        // bright dot
+        m3ctx.beginPath(); m3ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+        m3ctx.fillStyle = m3_glowColor; m3ctx.fill();
+
+        if (i < steps) { i++; m3_rafId = requestAnimationFrame(tick); }
+        else {
+          // fade out canvas, fade in SVG fill
+          let alpha2 = 1;
+          function fadeOut() {
+            alpha2 -= 0.04;
+            m3ctx.clearRect(0, 0, 260, 260);
+            if (alpha2 > 0) {
+              trail.forEach((p, idx) => {
+                m3ctx.beginPath(); m3ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                m3ctx.fillStyle = m3_glowColor.replace('1)', alpha2 * 0.5 + ')');
+                m3ctx.fill();
+              });
+              requestAnimationFrame(fadeOut);
+            }
+          }
+          m3svg_el.style.opacity = '1';
+          fadeOut();
+        }
+      }
+      setTimeout(() => requestAnimationFrame(tick), 200);
+    }
+    setTimeout(m3_play, 1000);
+
+    // ══════════════════════════════════════════════
+    // METHOD 4 — ink radial spread
+    // ══════════════════════════════════════════════
+    const inkStop = document.getElementById('inkStop');
+    function m4_play() {
+      inkStop.setAttribute('offset', '0%');
+      void inkStop.offsetWidth;
+      let p = 0;
+      clearInterval(window._inkInt);
+      window._inkInt = setInterval(() => {
+        p = Math.min(p + 1.5, 100);
+        inkStop.setAttribute('offset', p + '%');
+        if (p >= 100) clearInterval(window._inkInt);
+      }, 16);
+    }
+    setTimeout(m4_play, 1200);
+
+    // ══════════════════════════════════════════════
+    // METHOD 5 — segmented reveal
+    // ══════════════════════════════════════════════
+    const seg_l = document.getElementById('seg_l');
+    const seg_r = document.getElementById('seg_r');
+    const seg_c = document.getElementById('seg_c');
+    function m5_play() {
+      [seg_l, seg_r, seg_c].forEach(el => { el.style.transition = 'none'; el.style.opacity = '0'; el.style.transform = ''; void el.offsetWidth; });
+      // Left: slides from left
+      seg_l.style.transform = 'translateX(-40px)';
+      seg_l.style.opacity = '0';
+      setTimeout(() => { seg_l.style.transition = 'transform .7s cubic-bezier(0.34,1.56,0.64,1), opacity .5s ease'; seg_l.style.transform = 'translateX(0)'; seg_l.style.opacity = '1'; }, 100);
+      // Right: slides from right
+      seg_r.style.transform = 'translateX(40px)';
+      seg_r.style.opacity = '0';
+      setTimeout(() => { seg_r.style.transition = 'transform .7s cubic-bezier(0.34,1.56,0.64,1), opacity .5s ease'; seg_r.style.transform = 'translateX(0)'; seg_r.style.opacity = '1'; }, 250);
+      // Center: drops from top
+      seg_c.style.transform = 'translateY(-40px)';
+      seg_c.style.opacity = '0';
+      setTimeout(() => { seg_c.style.transition = 'transform .6s cubic-bezier(0.34,1.56,0.64,1), opacity .4s ease'; seg_c.style.transform = 'translateY(0)'; seg_c.style.opacity = '1'; }, 420);
+    }
+    setTimeout(m5_play, 1400);
+  </script>
+</body>
+
+</html>

@@ -15,7 +15,7 @@ function splitTextIntoSpans(selector) {
       wordSpan.style.display = 'inline-block'
       wordSpan.style.whiteSpace = 'nowrap'
       if (wIdx < arr.length - 1) wordSpan.style.marginRight = '0.3em'
-      
+
       word.split('').forEach(char => {
         const span = document.createElement('span')
         span.className = 'char'
@@ -75,28 +75,28 @@ loader.load(
   (gltf) => {
     model = gltf.scene
     model.updateMatrixWorld(true) // Force Matrix World update for accurate Box3
-    
+
     const box = new THREE.Box3().setFromObject(model)
     const center = new THREE.Vector3()
     box.getCenter(center)
     const size = new THREE.Vector3()
     box.getSize(size)
-    
+
     // Shift model center to 0,0,0
     if (isFinite(center.x) && isFinite(center.y) && isFinite(center.z)) {
       model.position.sub(center)
     }
-    
+
     const modelGroup = new THREE.Group()
     modelGroup.add(model)
-    
+
     // Safe auto-scale based on bounding box max dimension
     const maxDim = Math.max(size.x, size.y, size.z)
     const targetScale = (isFinite(maxDim) && maxDim > 0) ? (2.6 / maxDim) : 1
     modelGroup.scale.set(targetScale, targetScale, targetScale)
     modelGroup.position.set(0, 0, 0)
     scene.add(modelGroup)
-    
+
     hideLoader()
     setupScrollSequence(modelGroup)
   },
@@ -107,14 +107,14 @@ loader.load(
   },
   (error) => {
     console.warn('Could not load kitty.glb. Using fallback procedural model.')
-    
+
     // Huge Procedural Model Fallback
     const geometry = new THREE.TorusKnotGeometry(1.3, 0.4, 220, 32)
     const material = new THREE.MeshStandardMaterial({
       color: 0x333333, roughness: 0.1, metalness: 0.95
     })
     model = new THREE.Mesh(geometry, material)
-    
+
     const wireGeo = new THREE.TorusKnotGeometry(1.33, 0.4, 110, 16)
     const wireMat = new THREE.MeshBasicMaterial({ color: 0xff4081, wireframe: true, transparent: true, opacity: 0.7 })
     model.add(new THREE.Mesh(wireGeo, wireMat))
@@ -124,7 +124,7 @@ loader.load(
     modelGroup.scale.set(1.2, 1.2, 1.2)
     modelGroup.position.set(0, 0, 0)
     scene.add(modelGroup)
-    
+
     hideLoader()
     setupScrollSequence(modelGroup)
   }
@@ -188,7 +188,7 @@ let targetScaleOffset = 1
 let currentScaleOffset = 1
 
 function setupScrollSequence(modelGroup) {
-  
+
   const mainTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".scroll-container",
@@ -204,7 +204,7 @@ function setupScrollSequence(modelGroup) {
         } else {
           isStage4Active = false
           if (dragHint) dragHint.style.opacity = '0'
-          
+
           // Reset interactions when leaving Stage 4
           targetScaleOffset = 1
           dragRotation.x = 0
@@ -217,7 +217,7 @@ function setupScrollSequence(modelGroup) {
   })
 
   // Stage 1 -> Stage 2 (Zoom in to Front Face - Keep Centered & Slightly Left)
-  mainTL.to(modelGroup.position, { x: -0.6, y: 0.1, z: 1.2, duration: 1, ease: "power1.inOut" }, 0)
+  mainTL.to(modelGroup.position, { x: -0.6, y: 0.1, z: 2, duration: 1, ease: "power1.inOut" }, 0)
   mainTL.to(modelGroup.rotation, { x: 0.1, y: -0.15, z: 0, duration: 1, ease: "power1.inOut" }, 0)
 
   // Stage 2 -> Stage 3 (Graceful Turn to Side Profile - Shift Slightly Right)
@@ -228,13 +228,13 @@ function setupScrollSequence(modelGroup) {
   mainTL.to(modelGroup.position, { x: 0, y: 0, z: 0, duration: 1, ease: "power1.inOut" }, 2)
   mainTL.to(modelGroup.rotation, { x: 0.5, y: 0.3, z: 0, duration: 1, ease: "power1.inOut" }, 2)
   mainTL.to(camera.position, { x: 0, y: 0, z: 5.5, duration: 1, ease: "power1.inOut" }, 2)
-  
+
   // Fade in the 3D Orbiting Text Ring at Stage 4!
   mainTL.to(ringMat, { opacity: 1, duration: 1, ease: "power2.inOut" }, 2)
 
   // --- GSAP Skill 1: Character Stagger Animation for Titles ---
   const sections = ['#stage-1', '#stage-2', '#stage-3']
-  
+
   sections.forEach((secId) => {
     const card = document.querySelector(`${secId} .text-card`)
     const chars = document.querySelectorAll(`${secId} .char`)
@@ -358,7 +358,7 @@ const tick = () => {
       dragRotation.x += dragVelocity.x
       dragRotation.y += dragVelocity.y
     }
-    
+
     // Apply drag rotation directly to the child model
     model.rotation.x = dragRotation.x
     model.rotation.y = dragRotation.y
@@ -381,7 +381,7 @@ const tick = () => {
       model.rotation.x += (0 - model.rotation.x) * 0.1
       model.rotation.y += (0 - model.rotation.y) * 0.1
     }
-    
+
     if (textRing) {
       baseRingRotationY += 0.008
       textRing.rotation.x += (0.25 - textRing.rotation.x) * 0.1
@@ -456,7 +456,7 @@ if (bgm && bgmBtn) {
   window.addEventListener('scroll', onFirstInteraction)
   window.addEventListener('wheel', onFirstInteraction)
   window.addEventListener('pointerdown', onFirstInteraction)
-  
+
   // Manual toggle button
   bgmBtn.addEventListener('click', (e) => {
     e.stopPropagation() // Prevent triggering the firstInteraction listener immediately
