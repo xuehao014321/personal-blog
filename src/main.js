@@ -182,8 +182,8 @@ async function loadBlogPosts() {
       const container = document.getElementById(`posts-${year}`)
       if (!container) return
       
-      // If there are 3 or more articles, render them as a 3D OptionWheel!
-      if (yearPosts.length >= 3) {
+      // Render ALL years as a 3D OptionWheel to ensure consistent layout height!
+      if (yearPosts.length > 0) {
         import('./option-wheel.js').then(module => {
           container.innerHTML = ''; // Clear container
 
@@ -230,8 +230,6 @@ async function loadBlogPosts() {
              window.gsap.set(infoWrapper.children[0], { opacity: 1, y: 0 });
           }
         });
-      } else {
-        container.innerHTML = yearPosts.map(renderPostCard).join('')
       }
       
       injected = true
