@@ -137,24 +137,24 @@ export function init3DScene() {
     })
 
     // Stage 1: 2023 - Full Body Shot (Left)
-    tl.to(group.position, { x: -0.6, y: -0.1, z: 0.8, ease: "power1.inOut" }, 0)
-    tl.to(group.rotation, { x: 0, y: -0.2, z: 0, ease: "power1.inOut" }, 0)
+    tl.to(group.position, { x: -0.6, y: -0.1, z: 0.8, duration: 1, ease: "power1.inOut" }, 0)
+    tl.to(group.rotation, { x: 0, y: -0.2, z: 0, duration: 1, ease: "power1.inOut" }, 0)
 
     // Stage 2: 2024 - Front Face Close-Up (Right)
-    tl.to(group.position, { x: 0.6, y: -0.2, z: 2.2, ease: "power1.inOut" }, 0.25)
-    tl.to(group.rotation, { x: 0.1, y: 0.1, z: 0, ease: "power1.inOut" }, 0.25)
+    tl.to(group.position, { x: 0.6, y: -0.2, z: 2.2, duration: 1, ease: "power1.inOut" }, 1)
+    tl.to(group.rotation, { x: 0.1, y: 0.1, z: 0, duration: 1, ease: "power1.inOut" }, 1)
 
     // Stage 3: 2025 - Profile Side View (Left, 90-degree turn)
-    tl.to(group.position, { x: -0.5, y: 0, z: 1.2, ease: "power1.inOut" }, 0.5)
-    tl.to(group.rotation, { x: 0, y: Math.PI / 2, z: 0, ease: "power1.inOut" }, 0.5)
+    tl.to(group.position, { x: -0.5, y: 0, z: 1.2, duration: 1, ease: "power1.inOut" }, 2)
+    tl.to(group.rotation, { x: 0, y: Math.PI / 2, z: 0, duration: 1, ease: "power1.inOut" }, 2)
 
     // Stage 4: 2026 - 540 Degree Spin to Other Profile (Right)
-    tl.to(group.position, { x: 0.6, y: -0.1, z: 1.6, ease: "power1.inOut" }, 0.75)
-    tl.to(group.rotation, { x: 0.05, y: Math.PI * 3.5, z: 0, ease: "power1.inOut" }, 0.75)
+    tl.to(group.position, { x: 0.6, y: -0.1, z: 1.6, duration: 1, ease: "power1.inOut" }, 3)
+    tl.to(group.rotation, { x: 0.05, y: Math.PI * 3.5, z: 0, duration: 1, ease: "power1.inOut" }, 3)
 
     // Stage 5: Future - Back View (Center, resolves to 3 * PI which is absolute 180 degrees)
-    tl.to(group.position, { x: 0, y: 0, z: 0.8, ease: "power1.inOut" }, 1.0)
-    tl.to(group.rotation, { x: 0.1, y: Math.PI * 3, z: 0, ease: "power1.inOut" }, 1.0)
+    tl.to(group.position, { x: 0, y: 0, z: 0.8, duration: 1, ease: "power1.inOut" }, 4)
+    tl.to(group.rotation, { x: 0.1, y: Math.PI * 3, z: 0, duration: 1, ease: "power1.inOut" }, 4)
   }
 
   // Mouse Parallax Interaction
