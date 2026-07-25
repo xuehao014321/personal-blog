@@ -244,9 +244,18 @@ async function loadAboutItems() {
 }
 
 // Load dynamic content
-loadBlogPosts()
-loadProjects()
-loadAboutItems()
+Promise.all([
+  loadBlogPosts(),
+  loadProjects(),
+  loadAboutItems()
+]).then(() => {
+  // Important: After DOM height changes from injected content, refresh GSAP!
+  if (typeof ScrollTrigger !== 'undefined') {
+    setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 300)
+  }
+})
 
 
 // 1. Initialize Lenis Smooth Scroll

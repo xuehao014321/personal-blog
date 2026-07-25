@@ -827,10 +827,10 @@ body.page-dark {
 
 /* --- Cinematic 3D Timeline Sections --- */
 .scene-section {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 0 8vw;
+  padding: 15vh 8vw;
   box-sizing: border-box;
   position: relative;
   z-index: 2;
