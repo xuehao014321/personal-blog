@@ -129,6 +129,11 @@
   justify-content: center;
   pointer-events: none;
   z-index: 98;
+  background: rgba(5, 5, 8, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 
 .bubble-menu-items.fixed {

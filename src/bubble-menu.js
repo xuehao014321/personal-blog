@@ -92,7 +92,8 @@ export function initBubbleMenu(containerSelector, options = {}) {
       if (window.lenis) window.lenis.stop();
       toggleBtn.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
-      gsap.set(overlay, { display: 'flex' });
+      gsap.set(overlay, { display: 'flex', opacity: 0 });
+      gsap.to(overlay, { opacity: 1, duration: 0.35, ease: 'power2.out' });
       gsap.killTweensOf([...bubbles, ...labels]);
       gsap.set(bubbles, { scale: 0, transformOrigin: '50% 50%' });
       gsap.set(labels, { y: 24, autoAlpha: 0 });
@@ -133,7 +134,8 @@ export function initBubbleMenu(containerSelector, options = {}) {
       if (window.lenis) window.lenis.start();
       toggleBtn.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
-      gsap.killTweensOf([...bubbles, ...labels]);
+      gsap.killTweensOf([overlay, ...bubbles, ...labels]);
+      gsap.to(overlay, { opacity: 0, duration: 0.25, ease: 'power2.in' });
       
       gsap.to(labels, {
         y: 24,
