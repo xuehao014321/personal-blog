@@ -134,94 +134,46 @@
     </div>
 
     <!-- Blog section with Timeline sidebar -->
-    <section id="timeline-view" class="timeline-container dark-theme">
-
-      <!-- Left: Timeline sidebar -->
-      <aside class="sticky-sidebar">
-        <div class="timeline-track">
-
-          <div class="timeline-entry active" data-target="blog-2026">
-            <div class="timeline-dot"></div>
-            <div class="timeline-meta">
-              <span class="timeline-year">2026</span>
-              <span class="timeline-desc">Final Year</span>
-            </div>
-          </div>
-
-          <div class="timeline-connector"></div>
-
-          <div class="timeline-entry" data-target="blog-2025">
-            <div class="timeline-dot"></div>
-            <div class="timeline-meta">
-              <span class="timeline-year">2025</span>
-              <span class="timeline-desc">Senior Year</span>
-            </div>
-          </div>
-
-          <div class="timeline-connector"></div>
-
-          <div class="timeline-entry" data-target="blog-2024">
-            <div class="timeline-dot"></div>
-            <div class="timeline-meta">
-              <span class="timeline-year">2024</span>
-              <span class="timeline-desc">Final Year</span>
-            </div>
-          </div>
-
-          <div class="timeline-connector"></div>
-
-          <div class="timeline-entry" data-target="blog-2023">
-            <div class="timeline-dot"></div>
-            <div class="timeline-meta">
-              <span class="timeline-year">2023</span>
-              <span class="timeline-desc">Junior Year</span>
-            </div>
-          </div>
-
+    <!-- 3D Cinematic Storytelling Layout -->
+    <div class="scroll-container" id="timeline-view">
+      
+      <!-- Stage 1: 2026 Evolution (Left Model, Right Text) -->
+      <section class="scene-section layout-right">
+        <div class="text-card gs_reveal">
+          <span class="badge">2026 / Evolution</span>
+          <h2 class="title gsap-split">WEB3D & AGENTIC AI.</h2>
+          <p class="desc gsap-desc">Scaling to full-stack engineering, WebGL 3D immersion, Sanity CMS architecture, and building intelligent AI agent workflows for future systems.</p>
+          <div class="projects-list" id="posts-2026"></div>
         </div>
-      </aside>
+      </section>
 
-      <!-- Right: Blog content -->
-      <div class="scroll-content">
+      <!-- Stage 2: 2024-2025 Capstone (Right Model, Left Text) -->
+      <section class="scene-section layout-left">
+        <div class="text-card gs_reveal">
+          <span class="badge">2024–2025 / Breakthrough</span>
+          <h2 class="title gsap-split">SENSOR FUSION AI.</h2>
+          <p class="desc gsap-desc">Designed EcoSortNet capstone system. Fusing AS7343 spectral data, VL53L0X laser ranging & LJC18A3 inductive sensing into real-time neural classification & servo control.</p>
+          <div class="projects-list" id="posts-2025" style="margin-bottom: 2rem;"></div>
+          <div class="projects-list" id="posts-2024"></div>
+        </div>
+      </section>
 
-        <!-- 2026 posts -->
-        <article id="blog-2026" class="content-section">
-          <div class="section-header">
-            <span class="section-badge">26</span>
-            <h2>2026</h2>
-          </div>
-          <div class="posts-container" id="posts-2026"></div>
-        </article>
+      <!-- Stage 3: 2023 Foundation (Left Model, Right Text) -->
+      <section class="scene-section layout-right">
+        <div class="text-card gs_reveal">
+          <span class="badge">2023 / Foundation</span>
+          <h2 class="title gsap-split">SYSTEM FOUNDATIONS.</h2>
+          <p class="desc gsap-desc">Deep diving into Computer Science & Embedded Systems. Building diagnostic toolkits, mastering I2C protocols, and writing Python sensor drivers from scratch.</p>
+          <div class="projects-list" id="posts-2023"></div>
+        </div>
+      </section>
 
-        <!-- 2025 posts -->
-        <article id="blog-2025" class="content-section">
-          <div class="section-header">
-            <span class="section-badge">25</span>
-            <h2>2025</h2>
-          </div>
-          <div class="posts-container" id="posts-2025"></div>
-        </article>
-
-        <!-- 2024 posts -->
-        <article id="blog-2024" class="content-section">
-          <div class="section-header">
-            <span class="section-badge">24</span>
-            <h2>2024</h2>
-          </div>
-          <div class="posts-container" id="posts-2024"></div>
-        </article>
-
-        <!-- 2023 posts -->
-        <article id="blog-2023" class="content-section">
-          <div class="section-header">
-            <span class="section-badge">23</span>
-            <h2>2023</h2>
-          </div>
-          <div class="posts-container" id="posts-2023"></div>
-        </article>
-
+      <!-- Bottom Spacer for the 4th Stage (Back view) -->
+      <div style="height: 40vh; display: flex; align-items: center; justify-content: center; pointer-events: none;">
+         <h2 style="color: rgba(255,255,255,0.15); font-weight: 800; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: 0.2em;">THE FUTURE</h2>
       </div>
-    </section>
+
+    </div>
 
     <footer
       style="padding: 10rem 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
