@@ -156,6 +156,16 @@ export function initBubbleMenu(containerSelector, options = {}) {
     }
   }
 
+  function handlePillClick() {
+    if (isMenuOpen) {
+      handleToggle();
+    }
+  }
+
+  bubbles.forEach((bubble) => {
+    bubble.addEventListener('click', handlePillClick);
+  });
+
   toggleBtn.addEventListener('click', handleToggle);
   window.addEventListener('resize', handleResize);
 
@@ -163,9 +173,13 @@ export function initBubbleMenu(containerSelector, options = {}) {
     destroy: () => {
       toggleBtn.removeEventListener('click', handleToggle);
       window.removeEventListener('resize', handleResize);
+      bubbles.forEach((bubble) => {
+        bubble.removeEventListener('click', handlePillClick);
+      });
       document.removeEventListener('click', handleOutsideClick);
       document.removeEventListener('keydown', handleKeyDown);
       container.innerHTML = '';
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     }
   };

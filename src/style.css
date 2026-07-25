@@ -22,6 +22,11 @@
   cursor: none !important;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-dark); /* Default dark background */
@@ -42,7 +47,7 @@ html.lenis { height: auto; }
 .noise {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 100%; height: 100%;
   pointer-events: none;
   z-index: 9999;
   opacity: 0.04;
@@ -215,7 +220,7 @@ nav a:hover { opacity: 1; }
 .wave-divider-container {
   position: relative;
   height: 0px; /* Zero height so the white and black sections touch seamlessly */
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   z-index: 50; /* Ensure it floats above both sections */
@@ -716,8 +721,8 @@ body.page-dark {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 50;
   pointer-events: none;
 }
