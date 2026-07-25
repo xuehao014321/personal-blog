@@ -609,12 +609,17 @@ window.addEventListener('load', () => {
 
   // --- Splash Screen: Elastic Bounce + Press & Pop ---
   if (splash && splashWrap) {
+    const isMobile = window.innerWidth < 480;
+    const isTablet = window.innerWidth < 768;
+    const bounceOffset = isMobile ? -35 : (isTablet ? -50 : -80);
+    const returnOffset = isMobile ? 5 : (isTablet ? 8 : 12);
+
     // 1. Elastic Bounce (starts immediately)
     splashWrap.animate([
-      { transform: 'translateX(-80px) scaleX(1.3) scaleY(0.7)', easing: easeOut },
-      { transform: 'translateX(12px) scaleX(0.85) scaleY(1.15)', offset: .5, easing: easeHard },
-      { transform: 'translateX(-6px) scaleX(1.08) scaleY(0.94)', offset: .68 },
-      { transform: 'translateX(3px) scaleX(0.97) scaleY(1.03)', offset: .82 },
+      { transform: `translateX(${bounceOffset}px) scaleX(1.3) scaleY(0.7)`, easing: easeOut },
+      { transform: `translateX(${returnOffset}px) scaleX(0.85) scaleY(1.15)`, offset: .5, easing: easeHard },
+      { transform: `translateX(${bounceOffset * 0.08}px) scaleX(1.08) scaleY(0.94)`, offset: .68 },
+      { transform: `translateX(${bounceOffset * -0.04}px) scaleX(0.97) scaleY(1.03)`, offset: .82 },
       { transform: 'translateX(0) scaleX(1) scaleY(1)' }
     ], { duration: 900, fill: 'forwards' });
 
@@ -640,6 +645,7 @@ window.addEventListener('load', () => {
 
   // --- Navbar Logo: Segmented Reveal + 3D Coin Flip (Pure WAAPI) ---
   const navWrap = document.getElementById('nav-logo-wrap');
+  const navLink = document.querySelector('.navbar-logo-link');
   const seg_l = document.getElementById('nav_seg_l');
   const seg_r = document.getElementById('nav_seg_r');
   const seg_c = document.getElementById('nav_seg_c');
@@ -673,7 +679,18 @@ window.addEventListener('load', () => {
       // Play on initial load AFTER the segmented reveal finishes (delay ~1000ms)
       setTimeout(playCoinFlip, 1000);
       navWrap.addEventListener('mouseenter', playCoinFlip); // Play on hover
-      navWrap.addEventListener('touchstart', playCoinFlip, { passive: true }); // Play on mobile touch
+      
+      // Mobile Touch Handling for both Coin Flip and 4s Stroke Drawing
+      if (navLink) {
+        navLink.addEventListener('touchstart', (e) => {
+          playCoinFlip();
+          navLink.classList.add('touch-active');
+        }, { passive: true });
+        
+        navLink.addEventListener('touchend', () => {
+          setTimeout(() => navLink.classList.remove('touch-active'), 4000);
+        }, { passive: true });
+      }
 
 
       // Segment 1 (Left): slide in from left

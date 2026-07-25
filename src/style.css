@@ -808,7 +808,9 @@ body.page-dark {
   transform-origin: center;
 }
 
-.navbar-logo-link:hover .navbar-logo-svg .nav-draw-path {
+.navbar-logo-link:hover .navbar-logo-svg .nav-draw-path,
+.navbar-logo-link:active .navbar-logo-svg .nav-draw-path,
+.navbar-logo-link.touch-active .navbar-logo-svg .nav-draw-path {
   fill: none;
   stroke: currentColor;
   stroke-dashoffset: 820;
