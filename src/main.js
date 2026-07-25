@@ -209,7 +209,7 @@ async function loadBlogPosts() {
             fade: 0.65,
             minOpacity: 0.05,
             inset: 10,
-            side: parseInt(year) === 2024 || parseInt(year) === 2025 ? 'right' : 'left',
+            side: parseInt(year) % 2 === 0 ? 'right' : 'left',
             onChange: (idx) => {
                // Update info wrapper with the full card when a wheel item is selected
                infoWrapper.innerHTML = renderPostCard(yearPosts[idx]);
@@ -314,11 +314,21 @@ const lenis = new Lenis({
 });
 window.lenis = lenis;
 
-function raf(time) {
-  lenis.raf(time);
+// Sync Lenis with GSAP ScrollTrigger to eliminate backward scroll stuttering
+if (window.gsap && window.ScrollTrigger) {
+  lenis.on('scroll', ScrollTrigger.update);
+
+  window.gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  window.gsap.ticker.lagSmoothing(0, 0);
+} else {
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
   requestAnimationFrame(raf);
 }
-requestAnimationFrame(raf);
 
 // Integrate Lenis with GSAP ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);

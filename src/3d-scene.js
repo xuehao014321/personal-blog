@@ -87,9 +87,9 @@ export function init3DScene() {
 
     gsap.registerPlugin(ScrollTrigger)
 
-    // 1. Initial State: Model is full size, positioned below screen, fully transparent
+    // 1. Initial State: Model is full size, positioned directly at Stage 1, fully transparent
     gsap.set(group.scale, { x: targetScale, y: targetScale, z: targetScale })
-    gsap.set(group.position, { x: -0.6, y: -4.0, z: 0.8 })
+    gsap.set(group.position, { x: -0.6, y: -0.1, z: 0.8 }) // Static at Stage 1
     gsap.set(group.rotation, { x: 0, y: -0.2, z: 0 })
 
     group.traverse((child) => {
@@ -103,27 +103,16 @@ export function init3DScene() {
       }
     })
 
-    // 2. Entrance Animation: Slide up from bottom + Fade In Opacity (top 95% to top 50%)
-    gsap.to(group.position, {
-      y: -0.1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#timeline-view",
-        start: "top 95%",
-        end: "top 50%",
-        scrub: 1
-      }
-    })
-
+    // 2. Entrance Animation: ONLY Fade In Opacity (Triggers safely below the black line)
     const fader = { opacity: 0 }
     gsap.to(fader, {
       opacity: 1,
-      ease: "power2.out",
+      duration: 0.8,
+      ease: "power2.inOut",
       scrollTrigger: {
         trigger: "#timeline-view",
-        start: "top 95%",
-        end: "top 50%",
-        scrub: 1
+        start: "top 65%", // Trigger fade-in later, when the head is about 1/3 past the dividing line
+        toggleActions: "play none none reverse"
       },
       onUpdate: () => {
         group.traverse((child) => {
@@ -137,31 +126,35 @@ export function init3DScene() {
       }
     })
 
-    // 3. Cinematic 4-Stage Camera Sequence (Full Body -> Front Face CloseUp -> Profile -> Back View)
+    // 3. Cinematic 5-Stage Camera Sequence
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#timeline-view",
-        start: "top 50%",
+        start: "top 30%", // Start sequence after fade-in
         end: "bottom bottom",
-        scrub: 1.2
+        scrub: 1.5 // Added higher smoothing to prevent backwards scroll stutter (一卡一卡)
       }
     })
 
-    // Stage 1: Full Body Shot (Shift Left)
+    // Stage 1: 2023 - Full Body Shot (Left)
     tl.to(group.position, { x: -0.6, y: -0.1, z: 0.8, ease: "power1.inOut" }, 0)
     tl.to(group.rotation, { x: 0, y: -0.2, z: 0, ease: "power1.inOut" }, 0)
 
-    // Stage 2: Front Face Close-Up (Dolly in, Shift Right)
-    tl.to(group.position, { x: 0.6, y: -0.2, z: 2.2, ease: "power1.inOut" }, 0.33)
-    tl.to(group.rotation, { x: 0.1, y: 0.1, z: 0, ease: "power1.inOut" }, 0.33)
+    // Stage 2: 2024 - Front Face Close-Up (Right)
+    tl.to(group.position, { x: 0.6, y: -0.2, z: 2.2, ease: "power1.inOut" }, 0.25)
+    tl.to(group.rotation, { x: 0.1, y: 0.1, z: 0, ease: "power1.inOut" }, 0.25)
 
-    // Stage 3: Profile Side View (Shift Left, 90-degree turn)
-    tl.to(group.position, { x: -0.5, y: 0, z: 1.2, ease: "power1.inOut" }, 0.66)
-    tl.to(group.rotation, { x: 0, y: Math.PI / 2, z: 0, ease: "power1.inOut" }, 0.66)
+    // Stage 3: 2025 - Profile Side View (Left, 90-degree turn)
+    tl.to(group.position, { x: -0.5, y: 0, z: 1.2, ease: "power1.inOut" }, 0.5)
+    tl.to(group.rotation, { x: 0, y: Math.PI / 2, z: 0, ease: "power1.inOut" }, 0.5)
 
-    // Stage 4: Back View (Center, 180-degree turn towards footer)
+    // Stage 4: 2026 - 540 Degree Spin to Other Profile (Right)
+    tl.to(group.position, { x: 0.6, y: -0.1, z: 1.6, ease: "power1.inOut" }, 0.75)
+    tl.to(group.rotation, { x: 0.05, y: Math.PI * 3.5, z: 0, ease: "power1.inOut" }, 0.75)
+
+    // Stage 5: Future - Back View (Center, resolves to 3 * PI which is absolute 180 degrees)
     tl.to(group.position, { x: 0, y: 0, z: 0.8, ease: "power1.inOut" }, 1.0)
-    tl.to(group.rotation, { x: 0.1, y: Math.PI, z: 0, ease: "power1.inOut" }, 1.0)
+    tl.to(group.rotation, { x: 0.1, y: Math.PI * 3, z: 0, ease: "power1.inOut" }, 1.0)
   }
 
   // Mouse Parallax Interaction
