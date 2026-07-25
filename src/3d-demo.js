@@ -71,7 +71,7 @@ let model = null
 const loader = new GLTFLoader()
 
 loader.load(
-  '/models/kitty.glb', // User model
+  '/models/model.glb', // User 3D Model
   (gltf) => {
     model = gltf.scene
     model.updateMatrixWorld(true) // Force Matrix World update for accurate Box3
@@ -152,7 +152,7 @@ function create3DTextRing() {
   ctx.font = '900 70px Inter, sans-serif'
   ctx.textBaseline = 'middle'
 
-  const repeatText = '✦ HELLO KITTY ✦ XUE HAO SHOWCASE ✦ BUILD DEBUG SCALE ✦ THREE.JS & GSAP '
+  const repeatText = '✦ XUE HAO ✦ 2023 - 2026 CAREER PORTFOLIO ✦ SENSOR FUSION & FULL-STACK ✦ THREE.JS & GSAP '
   ctx.fillText(repeatText, 40, 128)
 
   const texture = new THREE.CanvasTexture(textCanvas)
