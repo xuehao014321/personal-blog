@@ -123,6 +123,8 @@ nav a:hover { opacity: 1; }
   position: relative;
   overflow: hidden;
   padding-top: 15vh;
+  background-color: #ffffff; /* Explicitly solid white to clip the model */
+  z-index: 100; /* Must be higher than webgl-canvas (50) to hide it! */
 }
 
 /* Image behind text */
@@ -718,12 +720,12 @@ body.page-dark {
 
 /* 3D Background Canvas */
 #webgl-canvas {
-  position: sticky;
+  position: fixed; /* Fixed to the screen, but hidden behind the white .hero section! */
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 50;
+  z-index: 1; /* Lower than timeline (2) so text cards appear above model */
   pointer-events: none;
 }
 /* Custom Navbar Logo */
