@@ -1,4 +1,0 @@
-# Cloudflare Pages Clean URLs Redirects
-/about    /about.html    200
-/projects /projects.html 200
-/3d-demo  /3d-demo.html  200
