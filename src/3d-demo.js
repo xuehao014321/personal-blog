@@ -66,15 +66,34 @@ scene.add(cyanLight)
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.5))
 
-// --- 3. Model Loading & Scaling ---
+// --- 3. Model Loading & Scaling (Merged from 18MB chunks for 100% original uncompressed quality) ---
 let model = null
 const loader = new GLTFLoader()
 
-loader.load(
-  '/models/kitty.glb', // User Kitty 3D Model
-  (gltf) => {
+const kittyParts = [
+  '/models/kitty.part1',
+  '/models/kitty.part2',
+  '/models/kitty.part3'
+]
+
+Promise.all(kittyParts.map(part => fetch(part).then(res => {
+  if (!res.ok) throw new Error(`Failed to load ${part}`)
+  return res.arrayBuffer()
+})))
+.then(buffers => {
+  const totalLen = buffers.reduce((acc, b) => acc + b.byteLength, 0)
+  const mergedArray = new Uint8Array(totalLen)
+  let offset = 0
+  for (const b of buffers) {
+    mergedArray.set(new Uint8Array(b), offset)
+    offset += b.byteLength
+  }
+  return mergedArray.buffer
+})
+.then(buffer => {
+  loader.parse(buffer, '', (gltf) => {
     model = gltf.scene
-    model.updateMatrixWorld(true) // Force Matrix World update for accurate Box3
+    model.updateMatrixWorld(true)
 
     const box = new THREE.Box3().setFromObject(model)
     const center = new THREE.Vector3()
@@ -82,7 +101,6 @@ loader.load(
     const size = new THREE.Vector3()
     box.getSize(size)
 
-    // Shift model center to 0,0,0
     if (isFinite(center.x) && isFinite(center.y) && isFinite(center.z)) {
       model.position.sub(center)
     }
@@ -90,7 +108,6 @@ loader.load(
     const modelGroup = new THREE.Group()
     modelGroup.add(model)
 
-    // Safe auto-scale based on bounding box max dimension
     const maxDim = Math.max(size.x, size.y, size.z)
     const targetScale = (isFinite(maxDim) && maxDim > 0) ? (2.6 / maxDim) : 1
     modelGroup.scale.set(targetScale, targetScale, targetScale)
@@ -99,36 +116,36 @@ loader.load(
 
     hideLoader()
     setupScrollSequence(modelGroup)
-  },
-  (xhr) => {
-    const percent = Math.round((xhr.loaded / xhr.total) * 100)
-    const loadingEl = document.getElementById('loading')
-    if (loadingEl) loadingEl.innerText = `Loading 3D Engine... ${percent}%`
-  },
-  (error) => {
-    console.warn('Could not load kitty.glb. Using fallback procedural model.')
+  }, (error) => {
+    console.warn('Could not parse kitty buffer. Using fallback procedural model.')
+    createFallbackModel()
+  })
+})
+.catch(error => {
+  console.warn('Could not load kitty chunks. Using fallback procedural model.', error)
+  createFallbackModel()
+})
 
-    // Huge Procedural Model Fallback
-    const geometry = new THREE.TorusKnotGeometry(1.3, 0.4, 220, 32)
-    const material = new THREE.MeshStandardMaterial({
-      color: 0x333333, roughness: 0.1, metalness: 0.95
-    })
-    model = new THREE.Mesh(geometry, material)
+function createFallbackModel() {
+  const geometry = new THREE.TorusKnotGeometry(1.3, 0.4, 220, 32)
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x333333, roughness: 0.1, metalness: 0.95
+  })
+  model = new THREE.Mesh(geometry, material)
 
-    const wireGeo = new THREE.TorusKnotGeometry(1.33, 0.4, 110, 16)
-    const wireMat = new THREE.MeshBasicMaterial({ color: 0xff4081, wireframe: true, transparent: true, opacity: 0.7 })
-    model.add(new THREE.Mesh(wireGeo, wireMat))
+  const wireGeo = new THREE.TorusKnotGeometry(1.33, 0.4, 110, 16)
+  const wireMat = new THREE.MeshBasicMaterial({ color: 0xff4081, wireframe: true, transparent: true, opacity: 0.7 })
+  model.add(new THREE.Mesh(wireGeo, wireMat))
 
-    const modelGroup = new THREE.Group()
-    modelGroup.add(model)
-    modelGroup.scale.set(1.2, 1.2, 1.2)
-    modelGroup.position.set(0, 0, 0)
-    scene.add(modelGroup)
+  const modelGroup = new THREE.Group()
+  modelGroup.add(model)
+  modelGroup.scale.set(1.2, 1.2, 1.2)
+  modelGroup.position.set(0, 0, 0)
+  scene.add(modelGroup)
 
-    hideLoader()
-    setupScrollSequence(modelGroup)
-  }
-)
+  hideLoader()
+  setupScrollSequence(modelGroup)
+}
 
 function hideLoader() {
   const loadingEl = document.getElementById('loading')

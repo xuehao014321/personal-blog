@@ -41,16 +41,36 @@ export function init3DScene() {
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.5))
 
-  // Model Loading
+  // Model Loading (Merged from 18MB chunks for 100% original uncompressed quality & Cloudflare compatibility)
   let modelGroup = new THREE.Group()
   scene.add(modelGroup)
 
   let model = null
   const loader = new GLTFLoader()
 
-  loader.load(
-    '/models/model.glb',
-    (gltf) => {
+  const modelParts = [
+    '/models/model.part1',
+    '/models/model.part2',
+    '/models/model.part3',
+    '/models/model.part4'
+  ]
+
+  Promise.all(modelParts.map(part => fetch(part).then(res => {
+    if (!res.ok) throw new Error(`Failed to load ${part}`)
+    return res.arrayBuffer()
+  })))
+  .then(buffers => {
+    const totalLen = buffers.reduce((acc, b) => acc + b.byteLength, 0)
+    const mergedArray = new Uint8Array(totalLen)
+    let offset = 0
+    for (const b of buffers) {
+      mergedArray.set(new Uint8Array(b), offset)
+      offset += b.byteLength
+    }
+    return mergedArray.buffer
+  })
+  .then(buffer => {
+    loader.parse(buffer, '', (gltf) => {
       model = gltf.scene
       model.updateMatrixWorld(true)
 
@@ -69,10 +89,8 @@ export function init3DScene() {
       modelGroup.add(model)
 
       setupScrollAnimation(modelGroup, targetScale)
-    },
-    undefined,
-    (err) => {
-      console.warn('Could not load /models/model.glb, fallback to knot geometry.', err)
+    }, (err) => {
+      console.warn('Could not parse model.glb buffer, fallback to knot geometry.', err)
       const geometry = new THREE.TorusKnotGeometry(1.2, 0.38, 200, 32)
       const material = new THREE.MeshStandardMaterial({
         color: 0x222222, roughness: 0.15, metalness: 0.9
@@ -80,8 +98,18 @@ export function init3DScene() {
       model = new THREE.Mesh(geometry, material)
       modelGroup.add(model)
       setupScrollAnimation(modelGroup, 1.2)
-    }
-  )
+    })
+  })
+  .catch((err) => {
+    console.warn('Could not load model chunks, fallback to knot geometry.', err)
+    const geometry = new THREE.TorusKnotGeometry(1.2, 0.38, 200, 32)
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x222222, roughness: 0.15, metalness: 0.9
+    })
+    model = new THREE.Mesh(geometry, material)
+    modelGroup.add(model)
+    setupScrollAnimation(modelGroup, 1.2)
+  })
 
   function setupScrollAnimation(group, targetScale) {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return
